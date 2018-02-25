@@ -1,0 +1,457 @@
+tbody.collapse.in {
+  display: table-row-group;
+}
+
+
+.btn{
+ margin: 2%;
+}
+#intro{
+   width: 100%;
+
+}
+.red_back{
+   background-color: #BF0A30;
+   height:15px;
+
+}
+.blue_back{
+     background-color: #002868;
+     height: 195px;
+}
+.white{
+     background-color: white;
+     height: 15px;;
+
+}
+.white_background{
+   background-color: white;
+   height: 3%;
+   width: 100%;
+}
+.blue_background{
+   background-color: #002868;
+   height: 15%;
+   width: 100%;
+}
+.blue_text_background{
+    background-color: #002868;
+    height: 15%;
+    width: 40%;
+    margin: left;
+}
+.white_text_header{
+
+ padding: 1%;
+ color: white;
+
+}
+/*
+body{
+  background-color: black;
+}
+*/
+.sidebar {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding-top: 12px;
+  position: absolute;
+  width: 100%;
+}
+
+.bottom,
+.bottom-left,
+.button-bar {
+  bottom: 0;
+  position: absolute;
+}
+
+.bottom-right,
+.button-bar-right {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+.branding-below {
+  bottom: 0px;
+  top: 0;
+}
+
+#bottom{
+  background-color: #e4e4e4;
+  height:  8%;
+ text-align: center;
+
+}
+
+#play_q, #play_a{
+ margin-top: 5px;
+ margin-bottom: 5px;
+}
+#ad1{
+   min-width: 300px;
+    min-height: 600px;
+
+}
+#ad2{
+   min-width: 300px;
+    min-height: 50px;
+
+}
+#remove_link_css{
+    color: black;
+    text-decoration: none;
+
+}
+
+
+/* unvisited link */
+a#remove_link_css:link {
+    color: black;
+}
+
+/* visited link */
+a#remove_link_css:visited {
+    color: black;
+    underline: none;
+}
+
+/* mouse over link */
+a#remove_link_css:hover {
+    color: black;
+    underline: none;
+}
+
+/* selected link */
+a#remove_link_css:active {
+    color: black;
+    underline: none;
+}
+.large_text{
+ font-size:300%;
+
+}
+
+.small_text{
+ font-size:50%;
+
+}
+#submit_state{
+    margin-top: 2%;
+}
+.blue{
+  border:  1px solid blue;
+
+}
+.jumbotron{
+  /*  background-image: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/values.png);*/
+
+
+
+}
+#welcome_img{
+
+}
+#blue_cloud {
+    display:block;
+    background-image: url( '/images/statue-of-liberty.jpg' );
+    background-size: cover;
+    height:50px;
+    width: 100px;
+
+}
+.title{
+ color: #541b3d;
+}
+.subtitle{
+  color:#962558 ;
+}
+.cell{
+ background-color: white;
+}
+body{
+/* background: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/languages.jpg) ;
+ background-repeat: repeat;*/
+
+}
+img {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+
+
+.black{
+   border:  1px solid black;
+
+}
+.yellow{
+  border:  1px solid yellow;
+
+}
+.red{
+  border:  1px solid red;
+
+}
+.green{
+  border:  1px solid green;
+
+}
+
+.light_gray{
+ background-color: "#d3d3d3";
+}
+
+
+#show_previous_single{
+  border-radius: 80%;
+  float: right;
+
+
+}
+
+#show_ne{
+   border-radius: 80%;
+   float: left;
+
+}
+
+
+#pbar {
+  height: 25px;
+  width: 45%;
+  background-color: white;
+
+}
+#pbar_inner {
+    background-color: black;
+
+
+}
+  #pbar_text {
+    text-align: center;
+    color: white;
+
+  }
+
+
+
+
+a.header_link:link, a.header_link:visited,.header_link{
+ color: yellow;
+}
+
+.small{
+ font-size:75%;
+ width:45%;
+}
+.thin_padding{
+  padding: 0.5em 0.6em;
+}
+
+
+.next {
+   background-color:black;
+
+}
+
+
+#jumbo1{
+ background-image: url(/images/statue-of-liberty.jpg);
+  background-position:right center;
+    background-repeat:no-repeat;
+    background-size: 60%; /* you change this to "contain" if you don't want the images to be cropped */
+    background-color:  #002868;
+    color: #FFF8DC;
+}
+
+
+@media screen and (max-width: 768px) {
+ /*   #jumbo1 {
+         background-image: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/statue-of-liberty-267948_1920.jpg);
+  background-position:right center;
+    background-repeat:no-repeat;
+    background-size: 25%; /* you change this to "contain" if you don't want the images to be cropped */
+/*    background-color:  #003366;
+    color: #FFF8DC;
+
+    }*/
+    #small_header_text{
+     display: none;
+
+    }
+    #flag_area{
+     display:none;
+    }
+    #title_area_blue{
+     height:15%;
+     width: 100%;
+    }
+    .wrap{
+     font-size: 10px;
+    }
+    .display-3{
+      font-size: 12px;
+    }
+    .center_text{
+       font-size: 12px;
+    }
+    #show_next_single{
+     height: 70%;
+     font-size: 14px;
+    }
+
+}
+
+
+.skin{
+  background-color: #d3d3d3;
+  width: 300px;
+
+  position: absolute;
+  left: 10px;
+
+
+
+  float: left;
+
+}
+#msg{
+
+
+}
+
+  .info{
+    background-color: white;
+    color:blue;
+  }
+
+/*end*/
+
+
+
+
+#quiz_div{
+  width: 400px;
+  height: 300px;
+ position: relative;
+}
+
+
+.form-control, .opt {
+ /* background-color: #dd4b39;*/
+  color: white;
+}
+
+/* flashcard*/
+
+
+
+
+
+.flip-container {
+  perspective: 1000;
+  float: none;
+  cursor: pointer;
+
+
+   overflow-y: hidden;
+overflow-x: hidden;
+
+  /*  &:hover{
+    .flippable {
+      transform: rotateY(180deg);
+    }
+  }*/
+}
+.flip-container .flippable {
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+
+}
+.flip-container .flipme {
+  transform: rotateY(180deg);
+
+
+
+}
+
+.flip-container,
+.front,
+.back {
+  width: 400px;
+  height: 300px;
+
+  text-align: center;
+  font-size: 20px;
+
+
+
+
+
+}
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+.front {
+  z-index: 2;
+  color: black;
+  width: 100%;
+
+
+
+}
+.center_text{
+ text-align: center;
+}
+.front span {
+
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  right: 10px;
+
+  font-family: verdana;
+
+/*  border:  1px solid yellow;*/
+}
+.back {
+  transform: rotateY(180deg);
+   direction: ltr;
+  font-family: Verdana;
+  color: black;
+  width: 100%;
+}
+#ans_text{
+
+ transform: none;
+
+
+}
+
+.ac-university .front {
+  /*background: 	#3f3f00;
+  background: #E82C0C;*/
+  background:#d3d3d3;
+
+}
+.ac-university .back {
+ /* background: #571004;
+  background: 	#3f3f00;*/
+  background: #d3d3d3;
+
+}
+
+.top_space{
+  margin-top: 5%;
+
+}
+
+/* end */
