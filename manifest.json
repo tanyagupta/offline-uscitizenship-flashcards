@@ -1,0 +1,35 @@
+{
+  "name": "Citizenship Test Flashcards",
+  "short_name": "Flashcards",
+  "icons": [{
+    "src": "/static/images/icons/android-chrome-192x192.png",
+      "sizes": "192X192",
+      "type": "image/png"
+    }, {
+      "src": "/static/images/icons/android-chrome-256x256.png",
+      "sizes": "256X256",
+      "type": "image/png"
+    }, {
+      "src": "/static/images/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }, {
+      "src": "/static/images//icons/mstile-150x150.png",
+      "sizes": "150X150",
+      "type": "image/png"
+    }, {
+      "src": "/static/images//icons/favicon.ico",
+      "sizes": "48X48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/static/images//icons/apple-touch-icon.png",
+      "sizes": "180X180",
+      "type": "image/png"
+    }],
+  "start_url": "/index.html?launcher=true",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#002868",
+  "theme_color": "#002868"
+}
