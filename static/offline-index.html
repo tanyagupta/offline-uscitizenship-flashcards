@@ -1,6 +1,24 @@
-tbody.collapse.in {
-  display: table-row-group;
-}
+<!-- global caches -->
+
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A website to welcome future immigrants and help them prepare for the US citizenship exam">
+<meta name="author" content="learnin60seconds.com">
+<meta name="keywords" content="US,citizenship,UCIS,naturalization,exam,USA,civics,Preguntas de educación cívica,Examen de Naturalización">
+<meta name="theme-color" content="#002868">
+
+
+<title>Civics Test Helper</title>
+
+
+
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+
+<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+
+
+
+<style>
 
 
 .btn{
@@ -78,29 +96,21 @@ body{
   top: 0;
 }
 
-#bottom{
+#bottom_area{
   background-color: #e4e4e4;
-  height:  8%;
+  height:  5%;
  text-align: center;
 
 }
 
-#play_q, #play_a{
+#play_q, #play_a, #show_next_single {
  margin-top: 5px;
  margin-bottom: 5px;
 }
-#ad1{
-   min-width: 300px;
-    min-height: 600px;
 
-}
-#ad2{
-   min-width: 300px;
-    min-height: 50px;
-
-}
-#remove_link_css{
+#remove_link_css, #home{
     color: black;
+    background-color: white;
     text-decoration: none;
 
 }
@@ -155,7 +165,7 @@ a#remove_link_css:active {
 }
 #blue_cloud {
     display:block;
-    background-image: url( '/images/statue-of-liberty.jpg' );
+    background-image: url('/images/statue-of-liberty.jp2');
     background-size: cover;
     height:50px;
     width: 100px;
@@ -258,14 +268,16 @@ a.header_link:link, a.header_link:visited,.header_link{
 
 
 #jumbo1{
- background-image: url(/images/statue-of-liberty.jpg);
-  background-position:right center;
+    background-image: url("/static/images/statue-of-liberty.png");
+    background-position:right center;
     background-repeat:no-repeat;
     background-size: 60%; /* you change this to "contain" if you don't want the images to be cropped */
     background-color:  #002868;
     color: #FFF8DC;
 }
-
+#answer_div{
+  font-size: 75%
+}
 
 @media screen and (max-width: 768px) {
  /*   #jumbo1 {
@@ -288,6 +300,7 @@ a.header_link:link, a.header_link:visited,.header_link{
      height:15%;
      width: 100%;
     }
+    /*
     .wrap{
      font-size: 10px;
     }
@@ -296,12 +309,12 @@ a.header_link:link, a.header_link:visited,.header_link{
     }
     .center_text{
        font-size: 12px;
-    }
-    #show_next_single{
+    }*/
+/*    #show_next_single{
      height: 70%;
      font-size: 14px;
     }
-
+*/
 }
 
 
@@ -385,7 +398,7 @@ overflow-x: hidden;
   height: 300px;
 
   text-align: center;
-  font-size: 20px;
+  font-size: 17px;
 
 
 
@@ -455,3 +468,117 @@ overflow-x: hidden;
 }
 
 /* end */
+</style>
+<body>
+<div class="sidebar branding-below">
+
+
+<div class="jumbotron thin_padding" id="jumbo1">
+
+<h1  class="display-3">Civics Test Helper</h1>
+
+<p  class="lead wrap">currently offline</p>
+<input id="home" type="button" onclick='terminate();$(".key_div").empty();$("#pbar").hide();$("#quiz_div").css({"font-size": "100%"});$("#quiz_div").html(start_html);' value="Start Over" />
+
+</div>
+
+ <div class="container main">
+
+ <div class="container">
+      <div class="row">
+        <div class="col-sm-1 key_div" id="pre_q">
+
+        </div>
+
+        <div class="col-sm-6 key_div" id="quiz_div">
+         <ul><li>Learn the citizenship civics questions with our digital flash cards</li><li>Hit the "Next" button to get a new flash card</li><li>Use left and right button to go back to previously viewed cards</li></ul>
+
+        <button type="button" id="start_page_1" onclick="start_page()" class="btn btn-primary btn-block btn btn-outline-primary">Start</button>
+
+
+
+
+        </div>
+         <div class="col-sm-1 key_div" id="ne_q">
+
+          </div>
+       </div>
+
+   </div>
+
+
+   <div class="row">
+   <div class="col-sm-3"></div>
+    <div class="col-sm-2"><div id="audio" class="row key_div"></div></div>
+     <div class="col-sm-1"></div>
+    </div>
+
+
+     <div class="row">
+   <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+
+    </div>
+     <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+   <div class="col-sm-3"></div>
+     <div class="col-sm-2"><div id="change_q" class="row key_div"></div></div>
+    <div class="col-sm-1"></div>
+     </div>
+
+    <div class="row">
+    <div class="col-sm-2"></div>
+     <div class="col-sm-6">
+     <div class="small text-center key_div" id="time_msg"></div>
+     <div class="col-sm-2"></div>
+     </div>
+   </div>
+
+   <div class="row">
+   <div class="col-sm-2"></div>
+    <div class="col-sm-9">
+    <div id="pbar"><div id="pbar_inner"><div id="pbar_text"> </div></div>  </div>
+    </div>
+   <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+    <div id="state" class="col-sm-12"></div>
+    </div>
+
+
+
+
+</div>
+
+
+
+<div>
+
+</div>
+
+<script>
+
+
+</script>
+
+<div id="bottom_area" class="sidebar bottom">
+  <small>
+         <a target='_blank' rel="noopener" href="https://learnin60seconds.com">
+         <img src='https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/148294770832813.png' width='100' height='16' alt="li60 logo"
+         target="_new"></a>
+
+          o&nbsp;<a href="mailto:myamericalifen@li60.zendesk.com?Subject=myamerica.life%" target="_top">Help</a>&nbsp;&nbsp;o
+          <a href="https://tanyagupta.github.io/tos.html" target="_new">Terms of Service</a>&nbsp;&nbsp;
+
+
+
+
+         </small>
+
+
+
+
+</div>

@@ -694,7 +694,7 @@ var state_data = {
 
 
      var ne_button =  '<div class="container"><button type="button" id="show_ne" onclick=\'choose_index("next",'+current_counter+')\' class="btn btn-outline-primary"><i class="fa fa-arrow-right fa-1x" aria-hidden="true"></i></button></div>';
-      var button = '<button type="button" id="show_next_single" onclick=\'play_random()\' class="btn btn-primary btn-block">Next</button>';
+      var button = '<button type="button" id="show_next_single" onclick=\'play_random()\' class="btn btn-sm btn-outline-primary">Show next</button>';
       var tough="";
       var cbox_html=""
       var dif_qs = sessionStorage.getItem ('difficult_ucis').length > 0 ? "<h5>Difficult Question Numbers</h5>"+sessionStorage.getItem ('difficult_ucis') : ""
@@ -703,7 +703,7 @@ var state_data = {
        var audio_button =  '<button type="button" id="play_q" onclick=\'play_audio('+index+',1)\' class="btn btn-sm btn-outline-primary">Play audio</button>';
        var text_a="answer"
        var audio_answer_button =  '<button type="button" id="play_a" onclick=\'play_audio('+index+',2)\' class="btn btn-sm btn-outline-primary">Hear answer</button>';
-      var image = '<img width=\"50" height=\"50\" src=\'https://github.com/tanyagupta/tanyagupta.github.io/blob/master/images/flip.png?raw=true\'>'
+      var image = '<img title="Click to flip and see question/answer" width=\"35" height=\"35\" src=\'/static/images/arrow.png\'>'
       var markup;
 
 
@@ -714,7 +714,7 @@ var state_data = {
        }
        var role ="capital"
        if(keys[index]["role_name"]){var role = (keys[index]["role_name"]).slice(0,-1)}
-       console.log(role)
+       //console.log(role)
 
        drop_html=drop_html+'</select><br><button id="submit_state">See my '+role+'</button>'
 
@@ -745,9 +745,25 @@ var state_data = {
         var msg = $( "#us_states option:selected" ).val();
 
         if(keys[index]["role_name"] && keys[index]["capital"]===false){
+  /*        const url = 'https://script.google.com/macros/s/AKfycbypEMJ3kW4juwLOp3iPod4fWjinezYGRFnJQYnw-WOiBHHkExw/exec?who='+keys[index]["role_name"]+'&state='+msg
+          fetch(url)
+            .then (response => {return response.json()})
+            .then(data => console.log("We have data:" + data.status))
+            .catch (err => {
+              console.log("===we have an error===")
+              console.log(err.stack)
+            })
+*/
+          $.get('https://script.google.com/macros/s/AKfycbypEMJ3kW4juwLOp3iPod4fWjinezYGRFnJQYnw-WOiBHHkExw/exec?who='+keys[index]["role_name"]+'&state='+msg,
+          function(data) {
 
-
-          $.get('/get_politicians?who='+keys[index]["role_name"]+'&state='+msg, function(data) { var x = JSON.parse(data); $("#answer_div").html(x["data"][0] && x["data"][0]["name"]+"<p class='small_text'> <a target='_blank' href='https://www.usa.gov/elected-officials'>More</a></p>" || "DC does not have "+keys[index]["role_name"]+" <a target='_blank' href='https://www.usa.gov/elected-officials'>More</a>")})
+            //console.log(data);
+            var x = data;
+          //  console.log(x)
+            $("#answer_div").html("<p class='small_text'>"+x["data"][0] && x["data"][0]["name"]
+            +"<a target='_blank' href='https://www.usa.gov/elected-officials'><small>&nbsp;(more)</a></small></p>" || "DC does not have "+keys[index]["role_name"]
+          //  +" <a target='_blank' href='https://www.usa.gov/elected-officials'>More</a>"
+          )})
 
         }
         else if(keys[index]["capital"]){
@@ -761,8 +777,8 @@ var state_data = {
 });
 
 
-       $("#audio").html(audio_button+"&nbsp;"+audio_answer_button);
-       $("#change_q").html('<div class="container"><div class="row"><div class="col-sm-12">'+button+'</div></div></div>');
+       $("#audio").html(audio_button+audio_answer_button);
+       $("#change_q").html(button);
        $("#pre_q").html(pre_button);
        $("#ne_q").html(ne_button);
 

@@ -1,27 +1,489 @@
 
 <head>
-  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://rawgit.com/swisnl/jQuery-contextMenu/master/src/jquery.contextMenu.js"></script>
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-<script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <script src="/js/libs.js"></script>
-  <script src="/js/scripts.js"></script>
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A website to welcome future immigrants and help them prepare for the US citizenship exam">
+<meta name="author" content="learnin60seconds.com">
+<meta name="keywords" content="US,citizenship,UCIS,naturalization,exam,USA,civics,Preguntas de educación cívica,Examen de Naturalización">
+<meta name="theme-color" content="#002868">
 
 
+<title>Civics Test Helper</title>
+
+
+
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+
+<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+
+
+
+  <link rel="stylesheet" defer href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <link rel="shortcut icon" href="/static/images/icons/favicon.ico" type="image/x-icon">
+
+
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrapmin.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/css/jquery-ui.min.css">
+<!--  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css.map">-->
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+ -->
+ <link rel="manifest" href="manifest.json">
 
 </head>
+
+<style>
+
+
+.btn{
+ margin: 2%;
+}
+#intro{
+   width: 100%;
+
+}
+.red_back{
+   background-color: #BF0A30;
+   height:15px;
+
+}
+.blue_back{
+     background-color: #002868;
+     height: 195px;
+}
+.white{
+     background-color: white;
+     height: 15px;;
+
+}
+.white_background{
+   background-color: white;
+   height: 3%;
+   width: 100%;
+}
+.blue_background{
+   background-color: #002868;
+   height: 15%;
+   width: 100%;
+}
+.blue_text_background{
+    background-color: #002868;
+    height: 15%;
+    width: 40%;
+    margin: left;
+}
+.white_text_header{
+
+ padding: 1%;
+ color: white;
+
+}
+/*
+body{
+  background-color: black;
+}
+*/
+.sidebar {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding-top: 12px;
+  position: absolute;
+  width: 100%;
+}
+
+.bottom,
+.bottom-left,
+.button-bar {
+  bottom: 0;
+  position: absolute;
+}
+
+.bottom-right,
+.button-bar-right {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+.branding-below {
+  bottom: 0px;
+  top: 0;
+}
+
+#bottom_area{
+  background-color: #e4e4e4;
+  height:  5%;
+ text-align: center;
+
+}
+
+#play_q, #play_a, #show_next_single {
+ margin-top: 5px;
+ margin-bottom: 5px;
+}
+
+#remove_link_css, #home{
+    color: black;
+    background-color: white;
+    text-decoration: none;
+
+}
+
+
+/* unvisited link */
+a#remove_link_css:link {
+    color: black;
+}
+
+/* visited link */
+a#remove_link_css:visited {
+    color: black;
+    underline: none;
+}
+
+/* mouse over link */
+a#remove_link_css:hover {
+    color: black;
+    underline: none;
+}
+
+/* selected link */
+a#remove_link_css:active {
+    color: black;
+    underline: none;
+}
+.large_text{
+ font-size:300%;
+
+}
+
+.small_text{
+ font-size:50%;
+
+}
+#submit_state{
+    margin-top: 2%;
+}
+.blue{
+  border:  1px solid blue;
+
+}
+.jumbotron{
+  /*  background-image: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/values.png);*/
+
+
+
+}
+#welcome_img{
+
+}
+#blue_cloud {
+    display:block;
+    background-image: url('/images/statue-of-liberty.jp2');
+    background-size: cover;
+    height:50px;
+    width: 100px;
+
+}
+.title{
+ color: #541b3d;
+}
+.subtitle{
+  color:#962558 ;
+}
+.cell{
+ background-color: white;
+}
+body{
+/* background: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/languages.jpg) ;
+ background-repeat: repeat;*/
+
+}
+img {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+
+
+.black{
+   border:  1px solid black;
+
+}
+.yellow{
+  border:  1px solid yellow;
+
+}
+.red{
+  border:  1px solid red;
+
+}
+.green{
+  border:  1px solid green;
+
+}
+
+.light_gray{
+ background-color: "#d3d3d3";
+}
+
+
+#show_previous_single{
+  border-radius: 80%;
+  float: right;
+
+
+}
+
+#show_ne{
+   border-radius: 80%;
+   float: left;
+
+}
+
+
+#pbar {
+  height: 25px;
+  width: 45%;
+  background-color: white;
+
+}
+#pbar_inner {
+    background-color: black;
+
+
+}
+  #pbar_text {
+    text-align: center;
+    color: white;
+
+  }
+
+
+
+
+a.header_link:link, a.header_link:visited,.header_link{
+ color: yellow;
+}
+
+.small{
+ font-size:75%;
+ width:45%;
+}
+.thin_padding{
+  padding: 0.5em 0.6em;
+}
+
+
+.next {
+   background-color:black;
+
+}
+
+
+#jumbo1{
+    background-image: url("/static/images/statue-of-liberty.png");
+    background-position:right center;
+    background-repeat:no-repeat;
+    background-size: 60%; /* you change this to "contain" if you don't want the images to be cropped */
+    background-color:  #002868;
+    color: #FFF8DC;
+}
+#answer_div{
+  font-size: 75%
+}
+
+@media screen and (max-width: 768px) {
+ /*   #jumbo1 {
+         background-image: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/statue-of-liberty-267948_1920.jpg);
+  background-position:right center;
+    background-repeat:no-repeat;
+    background-size: 25%; /* you change this to "contain" if you don't want the images to be cropped */
+/*    background-color:  #003366;
+    color: #FFF8DC;
+
+    }*/
+    #small_header_text{
+     display: none;
+
+    }
+    #flag_area{
+     display:none;
+    }
+    #title_area_blue{
+     height:15%;
+     width: 100%;
+    }
+    /*
+    .wrap{
+     font-size: 10px;
+    }
+    .display-3{
+      font-size: 12px;
+    }
+    .center_text{
+       font-size: 12px;
+    }*/
+/*    #show_next_single{
+     height: 70%;
+     font-size: 14px;
+    }
+*/
+}
+
+
+.skin{
+  background-color: #d3d3d3;
+  width: 300px;
+
+  position: absolute;
+  left: 10px;
+
+
+
+  float: left;
+
+}
+#msg{
+
+
+}
+
+  .info{
+    background-color: white;
+    color:blue;
+  }
+
+/*end*/
+
+
+
+
+#quiz_div{
+  width: 400px;
+  height: 300px;
+ position: relative;
+}
+
+
+.form-control, .opt {
+ /* background-color: #dd4b39;*/
+  color: white;
+}
+
+/* flashcard*/
+
+
+
+
+
+.flip-container {
+  perspective: 1000;
+  float: none;
+  cursor: pointer;
+
+
+   overflow-y: hidden;
+overflow-x: hidden;
+
+  /*  &:hover{
+    .flippable {
+      transform: rotateY(180deg);
+    }
+  }*/
+}
+.flip-container .flippable {
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+
+}
+.flip-container .flipme {
+  transform: rotateY(180deg);
+
+
+
+}
+
+.flip-container,
+.front,
+.back {
+  width: 400px;
+  height: 300px;
+
+  text-align: center;
+  font-size: 17px;
+
+
+
+
+
+}
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+.front {
+  z-index: 2;
+  color: black;
+  width: 100%;
+
+
+
+}
+.center_text{
+ text-align: center;
+}
+.front span {
+
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  right: 10px;
+
+  font-family: verdana;
+
+/*  border:  1px solid yellow;*/
+}
+.back {
+  transform: rotateY(180deg);
+   direction: ltr;
+  font-family: Verdana;
+  color: black;
+  width: 100%;
+}
+#ans_text{
+
+ transform: none;
+
+
+}
+
+.ac-university .front {
+  /*background: 	#3f3f00;
+  background: #E82C0C;*/
+  background:#d3d3d3;
+
+}
+.ac-university .back {
+ /* background: #571004;
+  background: 	#3f3f00;*/
+  background: #d3d3d3;
+
+}
+
+.top_space{
+  margin-top: 5%;
+
+}
+
+/* end */
+</style>
 <body>
 <div class="sidebar branding-below">
 
@@ -31,7 +493,6 @@
 <h1  class="display-3">Civics Test Helper</h1>
 
 <p  class="lead wrap">Citizenship civics questions with digital flash cards</p>
-<button><a href="/" id="remove_link_css">Home</a></button>
 <input id="home" type="button" onclick='terminate();$(".key_div").empty();$("#pbar").hide();$("#quiz_div").css({"font-size": "100%"});$("#quiz_div").html(start_html);' value="Start Over" />
 
 </div>
@@ -112,28 +573,25 @@
 <div>
 
 </div>
-<div id="ad2">
 
-</div>
 <script>
 
 
 </script>
 
-<div id="bottom" class="sidebar bottom">
-  <font size="-3">
-          By: <a target='_blank'href="http://learnin60seconds.com" onclick="ga('send', 'event', 'Civics Test External Link Li60 New', 'Click', 'Civics Test External Li60 Link Click New');"><img src='https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/148294770832813.png' width='100' height='16' target="_new"></a>
+<div id="bottom_area" class="sidebar bottom">
+  <small>
+         <a target='_blank' rel="noopener" href="https://learnin60seconds.com">
+         <img src='https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/148294770832813.png' width='100' height='16' alt="li60 logo"
+         target="_new"></a>
 
           o&nbsp;<a href="mailto:myamericalifen@li60.zendesk.com?Subject=myamerica.life%" target="_top">Help</a>&nbsp;&nbsp;o
-          <a href="https://tanyagupta.github.io/tos.html" target="_new">Terms of Service</a>&nbsp;&nbsp;o
-           Docs Add-On <a href="https://gsuite.google.com/marketplace/app/word_cloud_generator/360115564222" target="_new" onclick="ga('send', 'event', 'Civics Test External Link Doc Add On New', 'Click', 'External Web App Link Click New');">word cloud generator </a>&nbsp;&nbsp;
-           o
-           <a href="http://wordtagcloud.com" target="_new" onclick="ga('send', 'event', 'Civics Test External Link', 'Click', 'Civics Test External link');">wordtagcloud.com </a>&nbsp;&nbsp;.com</a>
+          <a href="https://tanyagupta.github.io/tos.html" target="_new">Terms of Service</a>&nbsp;&nbsp;
 
 
 
 
-          </font>
+         </small>
 
 
 
@@ -141,9 +599,24 @@
 </div>
 
 
+
+
+
+
+
+  <script src="static/js/libs.js"></script>
+  <script defer src="static/js/scripts.js"></script>
+
+  <script defer src="/static/js/bootstrap.min.js" defer></script>
+  <script defer src="/static/js/jquery-ui.min.js" defer></script>
+
+
 </body>
 
 <script>
+/*global caches*/
+/*global navigator*/
+
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
@@ -155,5 +628,6 @@
         console.log('Service Worker registration failed: ', err);
       });
   }
+  
 
 </script>
