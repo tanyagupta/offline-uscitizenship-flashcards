@@ -8,20 +8,145 @@ var  intervalID;// = window.setInterval(display_time, 1000);
 var times=0;
 
 
-var data = [['What is the supreme law of the land?',6,'#6baed6','What is the supreme law of the land?*Supreme Court rules*Do unto others*The Constitution*The Penal Code*The Constitution*','OSWl5ldEv6w',1,27,26],['What does the Constitution do?',7,'plum','What does the Constitution do?*Describes the process we use to select the President*Protects basic rights of Americans*Identifies the obligations of the citizens*Describes what a citizen is*Protects basic rights of Americans*','OSWl5ldEv6w',2,28,26],['The idea of self-government is in the first three words of the Constitution. What are these words?',7,'salmon',
-'The idea of self-government is in the first three words of the Constitution. What are these words?*We the People*We the government*Freedom is ours*Liberty, equality, fraternity*We the People*','OSWl5ldEv6w',3,29,26],['What is an amendment?',8,'gold','What is an amendment?*A change to the rule of law*Any law that 80% of the Senate votes for*A new fundamental right for citizens*A change to the Constitution*A change to the Constitution*','OSWl5ldEv6w',4,30,26],['What do we call the first ten amendments to the Constitution?',8,'goldenrod','What do we call the first ten amendments to the Constitution?*The 10 amendments*The Bill of Rights*The rule of law*The rights of citizens*The Bill of Rights*','OSWl5ldEv6w',5,31,26],
-['What is one right or freedom from the First Amendment?',8,'#3182bd','What is one right or freedom from the First Amendment?*The right to free speech*The right to vote*The right to carry arms*The right to assemble militia*The right to free speech*','OSWl5ldEv6w',6,32,26],['How many amendments does the Constitution have?',8,'#6baed6','How many amendments does the Constitution have?*Eleven*Twenty three *twenty-seven*Four*twenty-seven*','OSWl5ldEv6w',7,33,26],['What did the Declaration of Independence do?',9,'#9ecae1','What did the Declaration of Independence do?*Abolished slavery*Declared 4th of July as a holiday*Made Lincoln president*Declared our independence from Great Britain*Declared our independence from Great Britain*','OSWl5ldEv6w',8,34,26],
-['What are two rights in the Declaration of Independence?',9,'#a1d99b','What are two rights in the Declaration of Independence?*The right to carry guns, the right to a phone call*The right to a phone call, the right not to pay taxes*The right to freedom of speech, the right to vote*The right to life, the right to liberty*The right to life, the right to liberty*','OSWl5ldEv6w',9,35,26],['What is freedom of religion?',7,'blue','What is freedom of religion?*You can practice any religion, or not practice a religion*The State must not support any religion*You must not wear any religion signs or ornaments in public*All religions are equal before law*You can practice any religion, or not practice a religion*','OSWl5ldEv6w',10,36,26],['What is the economic system in the United States?',7,'red','What is the economic system in the United States?*Political Economy*Segmented Capitalism*Macroeconomic System*Market Economy*Market Economy*','OSWl5ldEv6w',11,37,26],['What is the “rule of law”?',7,'orange','What is the “rule of law”?*The Supreme Court is more powerful than the House and the Senate*Supreme Court judges cannot go to jail*No one is above the law*Police are given special exemptions*No one is above the law*','OSWl5ldEv6w',12,38,26],['Name one branch or part of the government',11,'yellow','Name one branch or part of the government*The Governor*The Executive Branch*The Police*The Marines*The Executive Branch*','OSWl5ldEv6w',13,39,26],['What stops one branch of government from becoming too powerful?',7,'#6baed6','What stops one branch of government from becoming too powerful?*Nothing, they are all independent*The Supreme Court*The President holds the final authority on everything*Separation of Powers*Separation of Powers*','OSWl5ldEv6w',14,40,26],['Who is in charge of the executive branch?',11,'orange','Who is in charge of the executive branch?*The President*The Speaker of the House*The Senate*CEOs*The President*','OSWl5ldEv6w',15,41,26],['Who makes federal laws?',14,'blue','Who makes federal laws?*The State*The President*The Supreme Court*Senate and the House of Representatives*Senate and the House of Representatives*','OSWl5ldEv6w',16,42,26],['What are the two parts of the U.S. Congress?',12,'#6baed6','What are the two parts of the U.S. Congress?*The Senate and the House of Representatives*The Senate and the Judiciary*The White House and the Blair House*The Democrats and the Republicans*The Senate and the House of Representatives*','OSWl5ldEv6w',17,43,26],['How many U.S. Senators are there?',12,'#dadaeb','How many U.S. Senators are there?*Sixty*Eighty-eight*One hundred *Ninety-nine*One hundred *','OSWl5ldEv6w',18,44,26],['We elect a U.S. Senator for how many years?',12,'#9ecae1','We elect a U.S. Senator for how many years?*Two*Six*Three*For life*Six*','OSWl5ldEv6w',19,45,26],['The House of Representatives has how many voting members?',12,'#756bb1','The House of Representatives has how many voting members?*Sixty *Four hundred and forty *One hundred *Four hundred thirty-five *Four hundred thirty-five *','OSWl5ldEv6w',21,47,26],['We elect a U.S. Representative for how many years?',12,'#9e9ac8','We elect a U.S. Representative for how many years?*Three*Six*Two*For life*Two*','OSWl5ldEv6w',22,48,26],['Who does a U.S. Senator represent?',12,'salmon','Who does a U.S. Senator represent?*All the people of the latitde/longitude you live in*All the citizens of the US*All the people of the state*All the people of the county you live in*All the people of the state*','OSWl5ldEv6w',24,50,26],['Why do some states have more Representatives than other states?',12,'gold','Why do some states have more Representatives than other states?*Because they were the original territories*Because they have more money*Because they have more people*Because they were part of the north durign civil war*Because they have more people*','OSWl5ldEv6w',25,51,26],['We elect a President for how many years?',11,'goldenrod','We elect a President for how many years?*Four years*Two years*Six years*For life*Four years*','OSWl5ldEv6w',26,52,26],['In what month do we vote for President?',11,'#3182bd','In what month do we vote for President?*January*February*November*March*November*','OSWl5ldEv6w',27,53,26],['What is the name of the President of the United States now?',11,'#6baed6','What is the name of the President of the United States now?*Barack Obama*George W Bush*Donald Trump*Bruce Springsteen*Donald Trump*','OSWl5ldEv6w',28,54,26],['What is the name of the Vice President of the United States now?',11,'#9ecae1','What is the name of the Vice President of the United States now?*Dick Cheney*Al Gore*Mike Pence*Joseph R. Biden*Mike Pence*','OSWl5ldEv6w',29,55,26],['If the President can no longer serve, who becomes President?',11,'#c7e9c0','If the President can no longer serve, who becomes President?*The Speaker of the House*The Vice President*The most senior senator*The Army chief of staff*The Vice President*','OSWl5ldEv6w',30,56,26],['If both the President and the Vice President can no longer serve, who becomes President?',11,'#756bb1','If both the President and the Vice President can no longer serve, who becomes President?*The most senior senator*Army chief of staff*the Speaker of the House*The Minority Whip*the Speaker of the House*','OSWl5ldEv6w',31,57,26],['Who is the Commander in Chief of the military?',11,'#9e9ac8','Who is the Commander in Chief of the military?*The most senior senator*Army chief of staff*The secretary of defense*The President*The President*','OSWl5ldEv6w',32,58,26],['Who signs bills to become laws?',11,'#bcbddc','Who signs bills to become laws?*The Supreme Court*The Whitehouse Chief of staff*The Secretary of Justice*The President*The President*','OSWl5ldEv6w',33,59,26],['Who vetoes bills?',11,'plum','Who vetoes bills?*The President*The Vetoer in Chief*The Senate*The House*The President*','OSWl5ldEv6w',34,60,26],['What does the President’s Cabinet do?',11,'salmon','What does the President’s Cabinet do?*Stores his clothes*Decides foreign policy*Advises the President*Passes laws*Advises the President*','OSWl5ldEv6w',35,61,26],['What are two Cabinet-level positions?',11,'gold','What are two Cabinet-level positions?*Secretary of Minority Affairs, Secretary of Judicial Reform*Secretary of Judicial Reform, Secretary of Commerce*Secretary of Commerce, Secretary of Defense*Secretary of Religious Affairs,  Secretary of Defense*Secretary of Commerce, Secretary of Defense*','OSWl5ldEv6w',36,62,26],['What does the judicial branch do?',13,'goldenrod','What does the judicial branch do?*Vetoes bills*Decides if a law goes against the Constitution*Declares wars*Provides health care*Decides if a law goes against the Constitution*','OSWl5ldEv6w',37,63,26],['What is the highest court in the United States?',13,'#3182bd','What is the highest court in the United States?*The Supreme Court*The Chief State Court*The Excecutive Court*The Congress Court*The Supreme Court*','OSWl5ldEv6w',38,64,26],['How many justices are on the Supreme Court?',13,'#6baed6','How many justices are on the Supreme Court?*Two*Six*Forty*Nine*Nine*','OSWl5ldEv6w',39,65,26],['Who is the Chief Justice of the United States now?',13,'#9ecae1','Who is the Chief Justice of the United States now?*William Rehnquist*Ruth Bader Ginsburg*Warren E. Burger*John G Roberts*John G Roberts*','OSWl5ldEv6w',40,66,26],['Under our Constitution, some powers belong to the federal government. What is one power of the federal government?',14,'#a1d99b','Under our Constitution, some powers belong to the federal government. What is one power of the federal government?*Declare a state of snow emergency*Pass a bill of attainder or ex post facto law*Print money*The writ of habeas corpus during peace time*Print money*','OSWl5ldEv6w',41,67,26],['Under our Constitution, some powers belong to the states. What is one power of the states?',14,'blue','Under our Constitution, some powers belong to the states. What is one power of the states?*Provide schooling and education*Regulate interstate commerce*Set standards of weights and measures*Raise and maintain an army and navy*Provide schooling and education*','OSWl5ldEv6w',42,68,26],['What are the two major political parties in the United States?',12,'yellow','What are the two major political parties in the United States?*The Evangelists and the Agnostics*The Green Party and the Democratic Party*The Republican Party and the Libertarians*The Democratic Party and the Republican Party*The Democratic Party and the Republican Party*','OSWl5ldEv6w',45,71,26],['What is the political party of the President now?',11,'#6baed6','What is the political party of the President now?*The Democratic Party*The Republican Party*The Green Party*The Libertarian*The Republican Party*','OSWl5ldEv6w',46,72,26],['What is the name of the Speaker of the House of Representatives now?',12,'orange','What is the name of the Speaker of the House of Representatives now?*Paul D. Ryan*John Boehner*Nancy Pelosi*J. Dennis Hastert*Paul D. Ryan*','OSWl5ldEv6w',47,73,26],['There are four amendments to the Constitution about who can vote. Describe one of them.',8,'blue','There are four amendments to the Constitution about who can vote. Describe one of them.*Places restrictions on the quartering of soldiers  during the voting process*Citizens eighteen and older can vote*Prohibits unreasonable searches and seizures  during voting*Candians can vote*Citizens eighteen and older can vote*','OSWl5ldEv6w',48,74,26],['What is one responsibility that is only for United States citizens?',26,'#6baed6','What is one responsibility that is only for United States citizens?*Can give birth to US citizens*Has the resposnibility to ensure a fair and speedy public trial by jury*Fight in a war on the behalf of the United States of America*Vote in a federal election*Vote in a federal election*','OSWl5ldEv6w',49,75,26],['Name one right only for United States citizens.',9,'#dadaeb','Name one right only for United States citizens.*The right to trial by jury *Run for federal office*The right not to pay excessive fines and excessive bail*The right to manufacture and sell alcohol *Run for federal office*','OSWl5ldEv6w',50,76,26],['What are two rights of everyone living in the United States?',9,'#9ecae1','What are two rights of everyone living in the United States?*Freedom of expression, freedom of speech*Engage in anti-government activities, freedom of speech*The right to deny services to non citizens, engage in anti-government activities*The right to use racial preferences in providing housing, engage in anti-government activities*Freedom of expression, freedom of speech*','OSWl5ldEv6w',51,77,26],['What do we show loyalty to when we say the Pledge of Allegiance?',26,'#c7e9c0','What do we show loyalty to when we say the Pledge of Allegiance?*The Senate, the President, and the Judiciary*The Constitution*The United States *Our forefathers*The United States *','OSWl5ldEv6w',52,78,26],['What is one promise you make when you become a United States citizen?',26,'#756bb1','What is one promise you make when you become a United States citizen?*Never to become a citizen of another country in the future*Give up loyalty to other countries*Never drink and drive*Always vote unless prevented by ill health*Give up loyalty to other countries*','OSWl5ldEv6w',53,79,26],['How old do citizens have to be to vote for President?',26,'#9e9ac8','How old do citizens have to be to vote for President?*Twenty-one*Sixteen*Eighteen*Nineteen *Eighteen*','OSWl5ldEv6w',54,80,26],['What are two ways that Americans can participate in their democracy?',26,'plum','What are two ways that Americans can participate in their democracy?*Carry arms*Get federal insurance*Vote*Practice hate speech*Vote*','OSWl5ldEv6w',55,81,26],['When is the last day you can send in federal income tax forms?',26,'salmon','When is the last day you can send in federal income tax forms?*February 13*March 13*December 31*April 15*April 15*','OSWl5ldEv6w',56,82,26],['When must all men register for the Selective Service?',26,'gold','When must all men register for the Selective Service?*Between eighteen and twenty-six*All men are not required to register for the Selective Service*Between sixteen and twenty-six*At age twenty-seven*Between eighteen and twenty-six*','OSWl5ldEv6w',57,83,26],['What is one reason colonists came to America?',15,'goldenrod','What is one reason colonists came to America?*Ability to buy land*To find gold*To spread atheism*Escape persecution*Escape persecution*','OSWl5ldEv6w',58,84,26],['Who lived in America before the Europeans arrived?',15,'#3182bd','Who lived in America before the Europeans arrived?*The Protestants*The Chinese*American Indians*The Catholics*American Indians*','OSWl5ldEv6w',59,85,26],['What group of people was taken to America and sold as slaves?',16,'#6baed6','What group of people was taken to America and sold as slaves?*Africans*The South Asians*The Native Americans from Latin America*People of Arab descent*Africans*','OSWl5ldEv6w',60,86,26],['Why did the colonists fight the British?',16,'#9ecae1','Why did the colonists fight the British?*They wanted to drink coffee, not tea, leading to the Boston tea party*Colonists who were a member of the British Parliament had to travel to Britian to enact laws*They didn’t have self-government*The reimbursement from the British Government for the wars fought by the colonists were not sufficient*They didn’t have self-government*','OSWl5ldEv6w',61,87,26],['Who wrote the Declaration of Independence?',17,'#c7e9c0','Who wrote the Declaration of Independence?*Thomas Jefferson*George Washington*Benjamin Franklin*Abraham Lincoln*Thomas Jefferson*','OSWl5ldEv6w',62,88,26],['When was the Declaration of Independence adopted?',17,'#756bb1','When was the Declaration of Independence adopted?*July 4, 1667*July 4, 1776*December 25, 1891*July 4, 1773*July 4, 1776*','OSWl5ldEv6w',63,89,26],['There were 13 original states. Name three.',17,'#9e9ac8','There were 13 original states. Name three.*Rhode Island,Connecticut, New York*Virginia, Alabama, Hawaii*California, New York, Indiana*Delaware, Texas, Rhode Island*Rhode Island,Connecticut, New York*','OSWl5ldEv6w',64,90,26],
-['What happened at the Constitutional Convention?',17,'#bcbddc','What happened at the Constitutional Convention?*The first draft of the Constition was written, to be finalized two years later*The Constitution was written*The Democrats and Republicans met to discuss the Constitution*The Founding Fathers met with citizens*The Constitution was written*','OSWl5ldEv6w',65,91,26],['When was the Constitution written?',18,'plum','When was the Constitution written?*1810*1787*1776*1778*1787*','OSWl5ldEv6w',66,92,26],['The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.',17,'salmon','The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.*Benjamin Franklin*John Adams*George Washington*Alexander Hamilton*Alexander Hamilton*','OSWl5ldEv6w',67,93,26],['What is one thing Benjamin Franklin is famous for?',17,'gold','What is one thing Benjamin Franklin is famous for?*Discovered Australlia*Wrote the Federalist Papers*Youngest member of the Constitutional Convention*First Postmaster General of the United States*First Postmaster General of the United States*','OSWl5ldEv6w',68,94,26],['Who is the “Father of Our Country?',18,'goldenrod','Who is the “Father of Our Country?*John Adams*George Washington*Abraham Lincoln*Benjamin Franklin*George Washington*','OSWl5ldEv6w',69,95,26],['Who was the first President?',18,'#3182bd','Who was the first President?*Abraham Lincoln*Alexander Hamilton*John Jay*George Washington*George Washington*','OSWl5ldEv6w',70,96,26],['What territory did the United States buy from France in 1803?',16,'#6baed6','What territory did the United States buy from France in 1803?*Louisiana*Texas*Nevada*Virginia*Louisiana*','OSWl5ldEv6w',71,97,26],['Name one war fought by the United States in the 1800s.',19,'#9ecae1','Name one war fought by the United States in the 1800s.*War of 1912*Second Heroin War*Comanche War*Mexican-American War*Mexican-American War*','OSWl5ldEv6w',72,98,26],['Name the U.S. war between the North and the South.',19,'#a1d99b','Name the U.S. war between the North and the South.*The Civil Rights War*The Consitutional War*the Civil War*The War of Independence*the Civil War*','OSWl5ldEv6w',73,99,26],['Name one problem that led to the Civil War.',19,'blue','Name one problem that led to the Civil War.*Economic Reasons*The assasination of Abraham Lincoln*Control over rivers*Disagreement on Banking regulations*Economic Reasons*','OSWl5ldEv6w',74,100,26],['What was one important thing that Abraham Lincoln did?',19,'red','What was one important thing that Abraham Lincoln did?*Established the first banking system in the country*Approved the rules of war, followed thereafter by every US President*Emancipation Proclamation*Established the post of the Vice President*Emancipation Proclamation*','OSWl5ldEv6w',75,101,26],['What did the Emancipation Proclamation do?',19,'orange','What did the Emancipation Proclamation do?*Freed the slaves*Gave women the right to vote*Allowed the non native population to vote*Gave women the right to divorce their husbands, subject to approval by the local court*Freed the slaves*','OSWl5ldEv6w',76,102,26],['What did Susan B. Anthony do?',20,'yellow','What did Susan B. Anthony do?*Won property ownership rights *Became the first female Senator*Wrote the federalist papers*Fought for women’s rights*Fought for women’s rights*','OSWl5ldEv6w',77,103,26],['Name one war fought by the United States in the 1900s.',20,'#6baed6','Name one war fought by the United States in the 1900s.*Utah War*Navajo War*Second Opium War*World War I*World War I*','OSWl5ldEv6w',78,104,26],['Who was President during World War I?',20,'orange','Who was President during World War I?*Martin Van Buren*Woodrow Wilson*John Tyler*Zachary Taylor*Woodrow Wilson*','OSWl5ldEv6w',79,105,26],['Who was President during the Great Depression and World War II?',20,'blue','Who was President during the Great Depression and World War II?*Martin Van Buren*John Tyler*Franklin D. Roosevelt*Zachary Taylor*Franklin D. Roosevelt*','OSWl5ldEv6w',80,106,26],['Who did the United States fight in World War II?',20,'#6baed6','Who did the United States fight in World War II?*Japan, Germany, Italy*China, Belgium, Italy*Japan, Russia, China*Germany, Poland, Japan*Japan, Germany, Italy*','OSWl5ldEv6w',81,107,26],['Before he was President, Eisenhower was a general. What war was he in?',20,'#dadaeb','Before he was President, Eisenhower was a general. What war was he in?*Border War of 1909*World War II*Posey War of 1923*Korean War of 1950*World War II*','OSWl5ldEv6w',82,108,26],['During the Cold War, what was the main concern of the United States?',20,'#9ecae1','During the Cold War, what was the main concern of the United States?*Communism*Poverty*Terrorism*Civil Rights*Communism*','OSWl5ldEv6w',83,109,26],['What movement tried to end racial discrimination?',20,'#c7e9c0','What movement tried to end racial discrimination?*The Boxer Rebellion*The Quaker Movement*The Civil Rights Movement*The Bannock Movement*The Civil Rights Movement*','OSWl5ldEv6w',84,110,26],['What did Martin Luther King, Jr. do?',20,'#756bb1','What did Martin Luther King, Jr. do?*Built one of the leading railroads in the country*Came up with scientific discoveries that led to the cure for small pox*Worked for equality for all Americans*Became one of the most highly lauded suffragettes of his time*Worked for equality for all Americans*','OSWl5ldEv6w',85,111,26],['What major event happened on September 11, 2001, in the United States?',21,'#9e9ac8','What major event happened on September 11, 2001, in the United States?*Pearl Harbor bombing*The Iraq War*Terrorists attacked the United States*The Afghanistan war started*Terrorists attacked the United States*','OSWl5ldEv6w',86,112,26],['Name one American Indian tribe in the United States.',15,'plum','Name one American Indian tribe in the United States.*Sioux*Cayenne*Ui Maine *Partholonians*Sioux*','OSWl5ldEv6w',87,113,26],['Name one of the two longest rivers in the United States.',22,'salmon','Name one of the two longest rivers in the United States.*Hudson, Embudo*Chattahooche, Canoe*Missouri, Mississippi*Delaware, Mississippi*Missouri, Mississippi*','OSWl5ldEv6w',88,114,26],['What ocean is on the West Coast of the United States?',22,'gold','What ocean is on the West Coast of the United States?*Atlantic *Indian*Pacific*Hawaiin*Pacific*','OSWl5ldEv6w',89,115,26],['What ocean is on the East Coast of the United States?',22,'goldenrod','What ocean is on the East Coast of the United States?*Pacific*Mississippi*Atlantic*Bay of Biscayne*Atlantic*','OSWl5ldEv6w',90,116,26],['Name one U.S. territory.',23,'#3182bd','Name one U.S. territory.*Bermuda*Bahamas*Guam*Solomon Islands*Guam*','OSWl5ldEv6w',91,117,26],['Name one state that borders Canada.',23,'#6baed6','Name one state that borders Canada.*Wyoming*Ohio*South Dakota*Oregon*Ohio*','OSWl5ldEv6w',92,118,26],['Name one state that borders Mexico.',23,'#9ecae1','Name one state that borders Mexico.*California*Wyoming*Arkansas*Alabama*California*','OSWl5ldEv6w',93,119,26],['What is the capital of the United States?',23,'#c7e9c0','What is the capital of the United States?*New York*Atlanta*Houston*Washington D.C.*Washington D.C.*','OSWl5ldEv6w',94,120,26],['Where is the Statue of Liberty?',23,'#756bb1','Where is the Statue of Liberty?*Washington DC*Liberty Island*LA*Maryland*Liberty Island*','OSWl5ldEv6w',95,121,26],['Why does the flag have 13 stripes?',24,'#9e9ac8','Why does the flag have 13 stripes?*The stripes represent the 13 founding fathers*The stripes represent the 13 articles of the consitution*The stripes represent the 13 fundamental rights* The stripes represent the original colonies* The stripes represent the original colonies*','OSWl5ldEv6w',96,122,26],['Why does the flag have 50 stars?',24,'#bcbddc','Why does the flag have 50 stars?*Each star represents a senator for a total of 50 senators*Each star represents a state*Each star represents the first district that was represented in the United States*The total of 50 stars reflects that we can have no more than 50 amendments to the United States constitution*Each star represents a state*','OSWl5ldEv6w',97,123,26],['What is the name of the national anthem?',24,'plum','What is the name of the national anthem?*The Star-Spangled Banner*America (My Country, Tis of Thee)*America the Beautiful*God Bless America*The Star-Spangled Banner*','OSWl5ldEv6w',98,124,26],['When do we celebrate Independence Day?',25,'salmon','When do we celebrate Independence Day?*August 12*September 9*June 5*July 4*July 4*','OSWl5ldEv6w',99,125,26]
-,['Name two national U.S. holidays.',25,'gold','Name two national U.S. holidays.*Presidents’ Day, Memorial Day*National Literacy Day, Presidential Day*Heritage Day, Victoria Day*Remembrance Day, Boxing Day*Presidents’ Day, Memorial Day*','OSWl5ldEv6w',100,126,26]
-,['What is the capital of your state?',14,'orange','What is the capital of your state?*Depends on your location*Annapolis*Augusta*Depends on your location*','OSWl5ldEv6w',44,70,26,true,,"capital"],
-['Who is one of your state’s U.S. Senators now?',12,'#c7e9c0','Who is one of your state’s U.S. Senators now?*Depends on your location*Ben Cardin*location+search;;;;;;;;;*Tom Cotton*Depends on your location*','OSWl5ldEv6w',20,46,26,true,"senators"],
-['Name your U.S. Representative.',12,'plum','Name your U.S. Representative.*Depends on your location*location+search;;;;;;;;;*Mark Sanford*Kristi Noem*Depends on your location*','OSWl5ldEv6w',23,49,26,true,"reps"]
-,['Who is the Governor of your state now?',14,'red','Who is the Governor of your state now?*Depends on your location*Larry Hogan*Doug Ducey*Depends on your location*','OSWl5ldEv6w',43,69,26,true,"governors"]]
+
+/* Fetch from our API */
+
+/* Indexeddb functions */
+var idbApp = (function() {
+  'use strict';
+
+  //check for support
+  if (!('indexedDB' in window)) {
+    console.log('This browser doesn\'t support IndexedDB');
+    return;
+  }
+
+  var dbPromise = idb.open('civicstest', 1, function(upgradeDb) {
+  switch (upgradeDb.oldVersion) {
+    case 0:
+    upgradeDb.createObjectStore('questions', {keyPath: 'id'});
+    upgradeDb.createObjectStore('capitals', {keyPath: 'acronym'});
+  }
+});
+
+
+  function getQuestions() {
+
+    dbPromise.then(function(db) {
+      var tx = db.transaction('questions', 'readonly');
+      var store = tx.objectStore('questions');
+      //console.log(store.getAll())
+      return store.getAll();
+    })
+
+  }
+
+function addQuestions(items){
 
 
 
 
+const api_url = "https://script.google.com/macros/s/AKfycbwyzooED9Ob5Egct3tvFuILRxsQNUjfJeHlAk9X5HOpaML1mApk/exec";
+fetch(api_url)
+  .then (response => {
+                        //console.log(response);
+                        return response.json()
+                      })  // .then(function(response){return response.json}
+  .then(items => {
+
+                  let data_mod = []
+                  for (const i in items){
+                    let one_data={};
+                    one_data["id"]=items[i][5];
+                    const qs = items[i][3].split("*");
+                    one_data["question"]=qs[0];
+
+                    one_data["is_location_dependent"]=items[i] && items[i][8] || false;
+                    one_data["answer"]= items[i]["is_location_dependent"] ? "Depends on your location" : qs[qs.length-2];
+                     one_data["role_name"] = (items[i] && items[i][9] && items[i][9].length>0) ? (items[i][9]) : false;
+
+                    data_mod.push(one_data)
+
+                  }
+                var items=data_mod;
+
+  dbPromise.then(function(db) {
+  var tx = db.transaction('questions', 'readwrite');
+  var store = tx.objectStore('questions');
+//console.log(items)
+
+return Promise.all(items.map(function(item) {
+  //  console.log('Adding item: ', item);
+    return store.add(item);
+  })
+).catch(function(e) {
+  tx.abort();
+  console.log(e);
+}).then(function() {
+  console.log('All items added successfully!');
+});
+})
+})
+
+}
+
+/* start*/
+
+function addCapitals(){
+const api_url_caps = "https://script.google.com/macros/s/AKfycbwyzooED9Ob5Egct3tvFuILRxsQNUjfJeHlAk9X5HOpaML1mApk/exec?capital=c";
+fetch(api_url_caps)
+  .then (response => {
+                        //console.log(response);
+                        return response.json()
+                      })  // .then(function(response){return response.json}
+  .then(items => {
+
+  dbPromise.then(function(db) {
+  var tx = db.transaction('capitals', 'readwrite');
+  var store = tx.objectStore('capitals');
+  var res=[]
+  for (var i in items){
+  //console.log(i)
+  var temp = {}
+  temp[i]=items[i]
+  //console.log(temp)
+//    res.push(temp)  //for some reason this does not work, need to explore, probably should push state acronym as a value instead of key
+   var temp=items[i]
+   temp["acronym"]=i
+  res.push(items[i])
+  }
+console.log(res)
+
+return Promise.all(res.map(function(item) {
+    //console.log('Adding capitals: ', item);
+    return store.add(item);
+  })
+).catch(function(e) {
+  tx.abort();
+  console.log(e);
+}).then(function() {
+  console.log('All capitals added successfully!');
+});
+})
+})
+
+
+}
+/* end*/
+
+
+return {
+    dbPromise: (dbPromise),
+     getQuestions: (getQuestions),
+     addQuestions: (addQuestions),
+      addCapitals: (addCapitals)
+}
+})();
+
+idbApp.addQuestions()
+idbApp.addCapitals()
+
+/* Start code */
 var start_html = '<ul><li>Learn the citizenship civics questions with our digital flash cards</li>'+
 '<li>Hit the \"Next\" button to get a new flash card</li><li>Use left and right button to go back to previously viewed cards</li></ul>'+
 '<button type=\"button\" id=\"start_page\" onclick=\"start_page()\" class=\"btn btn-primary btn-block btn btn-outline-primary\">Start</button>'
@@ -110,7 +235,23 @@ function show_news_list(what){
 function start_page(){
 $("#quiz_div").css({"font-size": "100%"});
 intervalID = window.setInterval(display_time, 1000);
+//$.get( "https://script.google.com/macros/s/AKfycbwyzooED9Ob5Egct3tvFuILRxsQNUjfJeHlAk9X5HOpaML1mApk/exec", function( data ) {
 
+var data;
+var dbPromise = idb.open('civicstest', 1, function(upgradeDb) {
+switch (upgradeDb.oldVersion) {
+  case 0:
+  upgradeDb.createObjectStore('questions', {keyPath: 'id'});
+}
+});
+
+
+dbPromise.then(function(db){
+  var tx = db.transaction('questions', 'readwrite');
+  var store = tx.objectStore('questions');
+  return store.getAll();
+
+}).then(function(data){
 
 //(data)
  $("#pbar").show();
@@ -137,9 +278,12 @@ sessionStorage.setItem("random_counter","0")
 sessionStorage.setItem("current_display_index","0");
 sessionStorage.setItem("questions_shown","");
 //(data[0])
+//console.log(data);
+//console.log("data for html")
  for (var i in data){
    var temp={};
-
+   //console.log(data[i])
+/*
    temp["ucis_id"] = data[i][5]
    temp["id"]=i
    temp["item"] = data[i][0]
@@ -155,20 +299,36 @@ sessionStorage.setItem("questions_shown","");
    temp["capital"] = (data[i] && data[i][10])==="capital" || false;
 
    temp["has_children"] = data[i][3].length===0;
+*/
+  temp["id"]=i;
+  temp["ucis_id"]=data[i]["id"];
+  temp["question"]=data[i]["question"];
+
+  temp["is_location_dependent"] =data[i]["is_location_dependent"];
+  temp["answer"]= temp["is_location_dependent"] ? "depends on your location" : data[i]["answer"];
+   temp["role_name"] = (data[i] && data[i]["role_name"]) ? (data[i]["role_name"]) : false;
 
   // temp["last_parent"] = false;
   all_data.push(temp)
   var res=[]
   for (var i in all_data){
-   res.push("Q."+all_data[i]["ucis_id"]+": "+all_data[i]["item"])
+  // res.push("Q."+all_data[i]["ucis_id"]+": "+all_data[i]["item"])
+   res.push("Q."+all_data[i]["ucis_id"]+": "+all_data[i]["question"])
 
   }
 
  }
-//(all_data)
+
 var quiz_only_data=[]
 for (var i in all_data){
- keys[all_data[i]["id"]]=all_data[i]
+  //console.log(all_data[i])
+  //console.log("here")
+
+ keys[all_data[i]["id"]]=all_data[i];
+// keys[all_data[i]["question"]]=all_data[i];
+// keys[all_data[i]["answer"]]=all_data[i];
+// keys[all_data[i]["is_location_dependent"]]=all_data[i];
+ //keys[all_data[i]]["role_name"]=all_data[i];
 }
 
 function make_quiz(string){
@@ -187,7 +347,8 @@ $("#time_msg").html("");
 
 play_random();
 
-
+//})
+})
 
 }
 
@@ -371,321 +532,27 @@ function play_random(){
 
 
 function gen_html(index,direction,flag){
-var state_data = {
-  "AL": {
-    "name": "Alabama",
-    "capital": "Montgomery",
-    "lat": "32.361538",
-    "long": "-86.279118"
-  },
-  "AK": {
-    "name": "Alaska",
-    "capital": "Juneau",
-    "lat": "58.301935",
-    "long": "-134.419740"
-  },
-  "AZ": {
-    "name": "Arizona",
-    "capital": "Phoenix",
-    "lat": "33.448457",
-    "long": "-112.073844"
-  },
-  "AR": {
-    "name": "Arkansas",
-    "capital": "Little Rock",
-    "lat": "34.736009",
-    "long": "-92.331122"
-  },
-  "CA": {
-    "name": "California",
-    "capital": "Sacramento",
-    "lat": "38.555605",
-    "long": "-121.468926"
-  },
-  "CO": {
-    "name": "Colorado",
-    "capital": "Denver",
-    "lat": "39.7391667",
-    "long": "-104.984167"
-  },
-  "CT": {
-    "name": "Connecticut",
-    "capital": "Hartford",
-    "lat": "41.767",
-    "long": "-72.677"
-  },
-  "DC": {
-    "name": "District of Columbia",
-    "capital": "D.C. is not a state and does not have a capital",
-    "lat": " 38.889931",
-    "long": "-77.009003"
-  },
-  "DE": {
-    "name": "Delaware",
-    "capital": "Dover",
-    "lat": "39.161921",
-    "long": "-75.526755"
-  },
-  "FL": {
-    "name": "Florida",
-    "capital": "Tallahassee",
-    "lat": "30.4518",
-    "long": "-84.27277"
-  },
-  "GA": {
-    "name": "Georgia",
-    "capital": "Atlanta",
-    "lat": "33.76",
-    "long": "-84.39"
-  },
-  "HI": {
-    "name": "Hawaii",
-    "capital": "Honolulu",
-    "lat": "21.30895",
-    "long": "-157.826182"
-  },
-  "ID": {
-    "name": "Idaho",
-    "capital": "Boise",
-    "lat": "43.613739",
-    "long": "-116.237651"
-  },
-  "IL": {
-    "name": "Illinois",
-    "capital": "Springfield",
-    "lat": "39.783250",
-    "long": "-89.650373"
-  },
-  "IN": {
-    "name": "Indiana",
-    "capital": "Indianapolis",
-    "lat": "39.790942",
-    "long": "-86.147685"
-  },
-  "IA": {
-    "name": "Iowa",
-    "capital": "Des Moines",
-    "lat": "41.590939",
-    "long": "-93.620866"
-  },
-  "KS": {
-    "name": "Kansas",
-    "capital": "Topeka",
-    "lat": "39.04",
-    "long": "-95.69"
-  },
-  "KY": {
-    "name": "Kentucky",
-    "capital": "Frankfort",
-    "lat": "38.197274",
-    "long": "-84.86311"
-  },
-  "LA": {
-    "name": "Louisiana",
-    "capital": "Baton Rouge",
-    "lat": "30.45809",
-    "long": "-91.140229"
-  },
-  "ME": {
-    "name": "Maine",
-    "capital": "Augusta",
-    "lat": "44.323535",
-    "long": "-69.765261"
-  },
-  "MD": {
-    "name": "Maryland",
-    "capital": "Annapolis",
-    "lat": "38.972945",
-    "long": "-76.501157"
-  },
-  "MA": {
-    "name": "Massachusetts",
-    "capital": "Boston",
-    "lat": "42.2352",
-    "long": "-71.0275"
-  },
-  "MI": {
-    "name": "Michigan",
-    "capital": "Lansing",
-    "lat": "42.7335",
-    "long": "-84.5467"
-  },
-  "MN": {
-    "name": "Minnesota",
-    "capital": "Saint Paul",
-    "lat": "44.95",
-    "long": "-93.094"
-  },
-  "MS": {
-    "name": "Mississippi",
-    "capital": "Jackson",
-    "lat": "32.320",
-    "long": "-90.207"
-  },
-  "MO": {
-    "name": "Missouri",
-    "capital": "Jefferson City",
-    "lat": "38.572954",
-    "long": "-92.189283"
-  },
-  "MT": {
-    "name": "Montana",
-    "capital": "Helana",
-    "lat": "46.595805",
-    "long": "-112.027031"
-  },
-  "NE": {
-    "name": "Nebraska",
-    "capital": "Lincoln",
-    "lat": "40.809868",
-    "long": "-96.675345"
-  },
-  "NV": {
-    "name": "Nevada",
-    "capital": "Carson City",
-    "lat": "39.160949",
-    "long": "-119.753877"
-  },
-  "NH": {
-    "name": "New Hampshire",
-    "capital": "Concord",
-    "lat": "43.220093",
-    "long": "-71.549127"
-  },
-  "NJ": {
-    "name": "New Jersey",
-    "capital": "Trenton",
-    "lat": "40.221741",
-    "long": "-74.756138"
-  },
-  "NM": {
-    "name": "New Mexico",
-    "capital": "Santa Fe",
-    "lat": "35.667231",
-    "long": "-105.964575"
-  },
-  "NY": {
-    "name": "New York",
-    "capital": "Albany",
-    "lat": "42.659829",
-    "long": "-73.781339"
-  },
-  "NC": {
-    "name": "North Carolina",
-    "capital": "Raleigh",
-    "lat": "35.771",
-    "long": "-78.638"
-  },
-  "ND": {
-    "name": "North Dakota",
-    "capital": "Bismarck",
-    "lat": "48.813343",
-    "long": "-100.779004"
-  },
-  "OH": {
-    "name": "Ohio",
-    "capital": "Columbus",
-    "lat": "39.962245",
-    "long": "-83.000647"
-  },
-  "OK": {
-    "name": "Oklahoma",
-    "capital": "Oklahoma City",
-    "lat": "35.482309",
-    "long": "-97.534994"
-  },
-  "OR": {
-    "name": "Oregon",
-    "capital": "Salem",
-    "lat": "44.931109",
-    "long": "-123.029159"
-  },
-  "PA": {
-    "name": "Pennsylvania",
-    "capital": "Harrisburg",
-    "lat": "40.269789",
-    "long": "-76.875613"
-  },
-  "RI": {
-    "name": "Rhode Island",
-    "capital": "Providence",
-    "lat": "41.82355",
-    "long": "-71.422132"
-  },
-  "SC": {
-    "name": "South Carolina",
-    "capital": "Columbia",
-    "lat": "34.000",
-    "long": "-81.035"
-  },
-  "SD": {
-    "name": "South Dakota",
-    "capital": "Pierre",
-    "lat": "44.367966",
-    "long": "-100.336378"
-  },
-  "TN": {
-    "name": "Tennessee",
-    "capital": "Nashville",
-    "lat": "36.165",
-    "long": "-86.784"
-  },
-  "TX": {
-    "name": "Texas",
-    "capital": "Austin",
-    "lat": "30.266667",
-    "long": "-97.75"
-  },
-  "UT": {
-    "name": "Utah",
-    "capital": "Salt Lake City",
-    "lat": "40.7547",
-    "long": "-111.892622"
-  },
-  "VT": {
-    "name": "Vermont",
-    "capital": "Montpelier",
-    "lat": "44.26639",
-    "long": "-72.57194"
-  },
-  "VA": {
-    "name": "Virginia",
-    "capital": "Richmond",
-    "lat": "37.54",
-    "long": "-77.46"
-  },
-  "WA": {
-    "name": "Washington",
-    "capital": "Olympia",
-    "lat": "47.042418",
-    "long": "-122.893077"
-  },
-  "WV": {
-    "name": "West Virginia",
-    "capital": "Charleston",
-    "lat": "38.349497",
-    "long": "-81.633294"
-  },
-  "WI": {
-    "name": "Wisconsin",
-    "capital": "Madison",
-    "lat": "43.074722",
-    "long": "-89.384444"
-  },
-  "WY": {
-    "name": "Wyoming",
-    "capital": "Cheyenne",
-    "lat": "41.145548",
-    "long": "-104.802042"
-  }
-}
 
   sessionStorage.setItem("current_display_index",index)
-  var ans = keys[index]["quiz"]["answer"]
-  var q = keys[index]["quiz"]["question"]
-  var ucis_id = all_data[index]["ucis_id"]
-  var id = all_data[index]["id"];
-  var show_dropdown_state = all_data[index]["is_location_dependent"]
+  //var ans = keys[index]["quiz"]["answer"]
+  //var q = keys[index]["quiz"]["question"]
+  //var ucis_id = all_data[index]["ucis_id"]
+  //var id = all_data[index]["id"];
+//console.log(keys)
+//console.log("keys")
+  var ans = keys[index]["answer"]
+  var q = keys[index]["question"]
+  var ucis_id =keys[index]["id"]
+  var role_name =keys[index]["role_name"]
+  //var id = all_data[index]["id"];
+//console.log(keys[index])
+
+
+  //var show_dropdown_state = all_data[index]["is_location_dependent"]
+  var show_dropdown_state = keys[index]["is_location_dependent"]
+
+
+
 
   var current_counter = index
 
@@ -708,15 +575,37 @@ var state_data = {
 
 
        var drop_html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select id="us_states">'
-       for (var i in state_data){
 
-        drop_html=drop_html+'<option value="'+i+'">'+state_data[i]["name"]+'</option>'
+
+
+       var dbPromise = idb.open('civicstest', 1, function(upgradeDb) {
+       switch (upgradeDb.oldVersion) {
+         case 0:
+         upgradeDb.createObjectStore('capitals', {keyPath: 'acronym'});
        }
-       var role ="capital"
-       if(keys[index]["role_name"]){var role = (keys[index]["role_name"]).slice(0,-1)}
-       //console.log(role)
+       });
 
-       drop_html=drop_html+'</select><br><button id="submit_state">See my '+role+'</button>'
+         dbPromise.then(function(db) {
+           var tx = db.transaction('capitals', 'readonly');
+           var store = tx.objectStore('capitals');
+           //console.log(store.getAll())
+           return store.getAll();
+         }).then(function(state_data){
+
+        //  console.log(state_data)
+
+
+
+
+
+
+       for (var i in state_data){
+         console.log(state_data[i])
+         drop_html=drop_html+'<option value="'+i+'">'+state_data[i]["name"]+'</option>'
+
+       }
+
+       drop_html=drop_html+'</select><br><button id="submit_state">See my '+role_name+'</button>'
 
 
 
@@ -741,10 +630,17 @@ var state_data = {
 
        $("#quiz_div").html(markup);
 
-       $("#submit_state").on("click", function(){
-        var msg = $( "#us_states option:selected" ).val();
+       $("#submit_state").on("click", function(e){
+      //  console.log(e)
 
-        if(keys[index]["role_name"] && keys[index]["capital"]===false){
+        // alert(e.target)
+        console.log($( "#us_states option:selected" ))
+        var num = $( "#us_states option:selected" ).val();
+      //  msg = (state_data[msg]["acronym"])
+//console.log(keys[index])
+        msg = state_data[num]["acronym"]
+        console.log(msg)
+        if(keys[index]["role_name"] !== "capital"){
   /*        const url = 'https://script.google.com/macros/s/AKfycbypEMJ3kW4juwLOp3iPod4fWjinezYGRFnJQYnw-WOiBHHkExw/exec?who='+keys[index]["role_name"]+'&state='+msg
           fetch(url)
             .then (response => {return response.json()})
@@ -754,26 +650,39 @@ var state_data = {
               console.log(err.stack)
             })
 */
+          //console.log(keys[index])
+        //  console.log(msg+"  msg")
           $.get('https://script.google.com/macros/s/AKfycbypEMJ3kW4juwLOp3iPod4fWjinezYGRFnJQYnw-WOiBHHkExw/exec?who='+keys[index]["role_name"]+'&state='+msg,
           function(data) {
+          //  console.log(data);
 
-            //console.log(data);
+
             var x = data;
-          //  console.log(x)
+            console.log(x)
+            console.log("data")
             $("#answer_div").html("<p class='small_text'>"+x["data"][0] && x["data"][0]["name"]
             +"<a target='_blank' href='https://www.usa.gov/elected-officials'><small>&nbsp;(more)</a></small></p>" || "DC does not have "+keys[index]["role_name"]
           //  +" <a target='_blank' href='https://www.usa.gov/elected-officials'>More</a>"
           )})
 
         }
-        else if(keys[index]["capital"]){
+        else if(keys[index]["role_name"] === "capital"){
 
-         $("#answer_div").html(state_data[msg]["capital"])
+         $("#answer_div").html(state_data[num]["capital"])
 
         }
         else{
          alert(msg);
         }
+
+
+
+})//object store access ends here
+
+
+
+
+
 });
 
 
@@ -814,9 +723,9 @@ var state_data = {
 function play_audio (index,type) {
   var string;
   if (type===1){
-   string = keys[index]["quiz"]["question"]
+   string = keys[index]["question"]
   }else{
-    string = keys[index]["quiz"]["answer"]
+    string = keys[index]["answer"]
   }
 
   var msg = new SpeechSynthesisUtterance();
