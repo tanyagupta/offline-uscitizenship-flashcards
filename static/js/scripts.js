@@ -115,7 +115,7 @@ fetch(api_url_caps)
    temp["acronym"]=i
   res.push(items[i])
   }
-console.log(res)
+//console.log(res)
 
 return Promise.all(res.map(function(item) {
     //console.log('Adding capitals: ', item);
@@ -366,7 +366,8 @@ function choose_index(direction,current_counter){
   // (curr_arr_len);
   var flag =""
 
-
+ console.log(`curr `+ curr)
+ console.log(`counter_array `+ counter_array)
 
 
   if (direction == "next")
@@ -381,7 +382,7 @@ function choose_index(direction,current_counter){
 
   }
 
-
+console.log(`index_to_show `+ index_to_show)
    return gen_html(index_to_show,direction,flag);
 
 }
@@ -600,7 +601,7 @@ function gen_html(index,direction,flag){
 
 
        for (var i in state_data){
-         console.log(state_data[i])
+        // console.log(state_data[i])
          drop_html=drop_html+'<option value="'+i+'">'+state_data[i]["name"]+'</option>'
 
        }
