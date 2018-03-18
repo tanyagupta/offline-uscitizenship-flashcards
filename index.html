@@ -40,7 +40,9 @@ body {
   line-height: 1.5;
   text-align: center;
   box-sizing: border-box; }
-
+.sound_icon{
+  width:25px;
+}
 #flashcard {
   border: 3px solid #3D7587;
   border-radius: 5px;
@@ -179,14 +181,17 @@ footer {
 /* end */
 </style>
 
-<body onload="get_next()">
+<body>
 		<section id="flashcard">
 			<article class="card">
 				<div class="question-container">
-					<div id="question" class="question">Question</div>
+					<div id="question" class="question"></div>
+          <p onclick="play_audio(0)">	<img class="sound_icon"src="https://png.icons8.com/metro/50/000000/high-volume.png"></p>
 				</div>
 				<div id= "answer" class="answer-container">
-					<div class="answer">Answer</div>
+					<div id="answer_text" class="answer"></div>
+            <p onclick="play_audio(1)">	<img class="sound_icon" src="https://png.icons8.com/metro/50/000000/high-volume.png"></p>
+
 				</div>
 			</article>
 			<div class="card-stack-1"></div>
@@ -195,14 +200,17 @@ footer {
 		</section>
 
 		<section id="controls">
-			<button id="get_previous" onclick="get_previous()" class="back">&lt;</button>
-			<button id="show-answer" class="show-answer">show answer</button>
-			<button id="get_next_1" onclick="get_next()" class="next">&gt;</button>
+			<button id="get_previous" onclick="getprevious()" >&lt;</button>
+			<button id="show-answer" onclick="showanswer()" >show answer</button>
+      <button id="get_next_1" onclick="getnext()" class="next"> &gt;</button>
+      <button id="get_next_1" onclick="start()" class="next"> Init</button>
+
 		</section>
 
 		<footer>
       By <a href='https://github.com/tanyagupta/offline-uscitizenship-flashcards'>Tanya Gupta</a>.<br>
-       <small> (Design inspired by <a href='https://github.com/ahoef/es2015-flashcard-app'>ahoef)</a></small>
+       <small> (Design inspired by</small> <a href='https://github.com/ahoef/es2015-flashcard-app'><small>ahoef</small></a>
+      <a href="https://icons8.com"><small> and Icon pack by Icons8)</small></a>
 		</footer>
 
 
