@@ -1,6 +1,9 @@
 /* <!--<link href="/static/tgportfolio/assets/favion.ico" rel="icon" type="image/x-icon">--> */
 const GLOBALS = {
   all_data:[],
+  all_capitals:[],
+  dropdownhtml:"",
+  num_questions:0,
   seq:[],
   SequenceController : function (sequence) {
 
@@ -105,6 +108,7 @@ function dbaseentries(){
      })
 
    }
+
 
    function addQuestions(items){
            const api_url = "https://script.google.com/macros/s/AKfycbwyzooED9Ob5Egct3tvFuILRxsQNUjfJeHlAk9X5HOpaML1mApk/exec";
@@ -211,7 +215,8 @@ function dbaseentries(){
      dbPromise: (dbPromise),
       getQuestions: (getQuestions),
       addQuestions: (addQuestions),
-       addCapitals: (addCapitals)
+       addCapitals: (addCapitals),
+      
      }
 
 
@@ -253,35 +258,57 @@ dbPromise.then(function(db){
   return store.getAll();
 
 }).then(function(data){
-
-
-
+ GLOBALS.num_questions = data.length
  for (var i in data){
    var temp={};
   temp["id"]=i;
   temp["ucis_id"]=data[i]["id"];
   temp["question"]=data[i]["question"];
-
   temp["is_location_dependent"] =data[i]["is_location_dependent"];
   temp["answer"]= temp["is_location_dependent"] ? "depends on your location" : data[i]["answer"];
    temp["role_name"] = (data[i] && data[i]["role_name"]) ? (data[i]["role_name"]) : false;
-
   GLOBALS.all_data.push(temp)
-
  }
-
+//console.log(GLOBALS.all_data)
 var quiz_only_data=[]
-
-
  seq = GLOBALS.SequenceController (GLOBALS.all_data);
-
-
 return display_elems(seq.current())
 
+});
 
 
-//})
-})
+
+var dbPromise = idb.open('civicstest', 1);
+
+
+dbPromise.then(function(db){
+  var tx = db.transaction('capitals', 'readonly');
+  var store = tx.objectStore('capitals');
+  return store.getAll();
+
+}).then(function(data){
+ 
+
+ const res = []
+ for (var i in data){
+     let temp={};
+     temp[data[i]["acronym"]]=data[i];
+     res.push(temp)
+    }
+GLOBALS.all_capitals = data;
+
+
+
+ let html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select id="us_states"><optgroup>'
+for (var i in data){
+    html = html + '<option id="'+data[i]["acronym"]+'"'+' value="'+data[i]["name"]+'">'+data[i]["name"]+'</option>'
+}
+GLOBALS.dropdownhtml= html+"</optgroup></select>"
+console.log(html)
+});
+
+
+
 
 }
 
@@ -298,11 +325,24 @@ function getnext(){
 }
 
 function display_elems(elems){
-  $("#question").html(elems["question"])
+
+  $("#question").html("UCIS Q#"+elems["ucis_id"]+": "+elems["question"])
+  $("#question").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
+$("#question").append("<p>"+elems["ucis_id"]+"/"+GLOBALS.num_questions+"</p>")
     $("#answer").hide();
-  $("#answer_text").html(elems["answer"])
+  
+ 
+  if (elems["is_location_dependent"]){
+        $("#answer_text").html(GLOBALS.dropdownhtml)
+    }
+    else{
+        $("#answer_text").html(elems["answer"]);
+        }
+    $("#answer_text").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
 }
+
 function showanswer(){
+
   $("#answer").show();
 }
 
@@ -334,6 +374,7 @@ function play_audio (code) {
   msg.addEventListener("end", function() {
 
    });
-
-
+   
 }
+
+
