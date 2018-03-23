@@ -46,6 +46,20 @@ select {
   
 }
 
+#start {
+  -webkit-border-radius: 44;
+  -moz-border-radius: 44;
+  border-radius: 44px;
+   font-family: 'Inconsolata', sans-serif;
+  color: #ffffff;
+  font-size: 55px;
+  background: #01579B;
+  padding: 7px 20px 10px 20px;
+  text-decoration: none;
+}
+
+
+
 #flashcard {
   border: 3px solid #3D7587;
   border-radius: 5px;
@@ -191,12 +205,13 @@ footer {
 	
 				<div class="question-container">
 				
-					<div id="question" class="question"></div>
+					<div id="question" class="question"><button id="start" onclick="start()" >Start</button></div>
 						
           
 				</div>
 				<div id= "answer" class="answer-container">
-					<div id="answer_text" class="answer"></div>		
+					<span id="answer_text" class="answer"></span>		
+	
 					
 				</div>
 			
@@ -209,6 +224,7 @@ footer {
 		</section>
 
 		<section id="controls">
+		  
 			<button id="get_previous" onclick="getprevious()" >&lt;</button>
 			<button id="show-answer" onclick="showanswer()" >show answer</button>
 
@@ -235,10 +251,16 @@ footer {
 </body>
 
 <script>
+ $("#start").prop("disabled",true);
+ $("#get_previous").prop("disabled",true);
+$("#show-answer").prop("disabled",true);
+$("#get_next_1").prop("disabled",true);
 
+    
+ 
 /*global caches*/
 /*global navigator*/
-
+/*
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
@@ -250,5 +272,5 @@ footer {
         console.log('Service Worker registration failed: ', err);
       });
   }
-
+*/
 </script>

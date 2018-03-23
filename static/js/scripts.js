@@ -5,9 +5,10 @@ const GLOBALS = {
   dropdownhtml:"",
   num_questions:0,
   seq:[],
+  all_politicians:{},
   SequenceController : function (sequence) {
 
-    outside = {}
+    var outside = {}
     let current =0;
 
     function get_next () {
@@ -39,35 +40,9 @@ const GLOBALS = {
 
 
 
-/* Fetch from our API */
+var idb = 
 
-/* Indexeddb functions */
-//const idbApp = function() {
-var promise = new Promise(function(resolve,reject){
-
-  $("#answer").hide()
-   resolve(dbaseentries());
-
-})
-
-promise.then(function(e){
-  console.log("I completed my first promise")
-//  start()
-  setTimeout(function(){
-    start() // Yay! Everything went well!
-  }, 2500);
-})
-.catch(
-       // Log the rejection reason
-      (reason) => {
-           console.log('Handle rejected promise ('+reason+') here.');
-       });
-
-
-
-function dbaseentries(){
-//function(){
-
+function(){
 
    'use strict';
 
@@ -91,6 +66,10 @@ function dbaseentries(){
        upgradeDb.createObjectStore('capitals', {keyPath: 'acronym'});
        addCapitals()
       }
+      if (!upgradeDb.objectStoreNames.contains('politicians')) {
+       upgradeDb.createObjectStore('politicians', {autoIncrement:true});
+       addPoliticians()
+      }
 
 
 
@@ -100,13 +79,76 @@ function dbaseentries(){
 
 
    function getQuestions() {
+    return dbPromise.then(function(db) {
+      var tx = db.transaction('questions', 'readonly');
+      var store = tx.objectStore('questions');
+      return store.getAll();
+    });
+  
 
-     dbPromise.then(function(db) {
-       var tx = db.transaction('questions', 'readonly');
-       var store = tx.objectStore('questions');
-       return store.getAll();
-     })
+   }
+   
+      function getPoliticians() {
+    return dbPromise.then(function(db) {
+      var tx = db.transaction('politicians', 'readonly');
+      var store = tx.objectStore('politicians');
+      return store.getAll();
+    });
+  
 
+   }
+   
+   function addPoliticians(){
+    const api_url = "https://script.google.com/macros/s/AKfycbypEMJ3kW4juwLOp3iPod4fWjinezYGRFnJQYnw-WOiBHHkExw/exec?politicians=a"  ;
+    fetch(api_url)
+             .then (response => {
+                                
+                                   return response.json()
+                                 })  // .then(function(response){return response.json}
+             .then(items => {
+
+                             let data_mod = []
+                            
+                            items=items.data
+                            
+                             for (let i in items)
+                             {
+                                
+                               let one_data={};
+                               one_data["role"]= items[i][0]==='Governors' ? 'governor' : items[i][0] ;
+                               one_data["state"]=items[i][1];
+                               one_data["name"]=items[i][2];
+                               data_mod.push(one_data)
+
+                             }
+                           
+                   
+
+             dbPromise.then(function(db)
+             {
+
+                   var tx = db.transaction('politicians', 'readwrite');
+                   var store = tx.objectStore('politicians');
+                   
+
+
+                 return Promise.all(data_mod.map(function(item) {
+                     return store.add(item);
+                   })
+                 ).catch(function(e) {
+                   tx.abort();
+                   console.log(e);
+                 }).then(function() {
+                   console.log('All politicians added successfully!');
+                 });
+
+
+           });
+
+         });
+    
+       
+       
    }
 
 
@@ -118,7 +160,7 @@ function dbaseentries(){
                                    return response.json()
                                  })  // .then(function(response){return response.json}
              .then(items => {
-
+                            
                              let data_mod = []
 
                              for (const i in items)
@@ -136,6 +178,7 @@ function dbaseentries(){
 
                              }
                            var items=data_mod;
+                           
 
              dbPromise.then(function(db)
              {
@@ -145,14 +188,14 @@ function dbaseentries(){
 
 
                  return Promise.all(items.map(function(item) {
-
+                     
                      return store.add(item);
                    })
                  ).catch(function(e) {
                    tx.abort();
                    console.log(e);
                  }).then(function() {
-                   console.log('All items added successfully!');
+                   console.log('All questions added successfully!');
                  });
 
 
@@ -174,15 +217,23 @@ function dbaseentries(){
            dbPromise.then(function(db) {
            var tx = db.transaction('capitals', 'readwrite');
            var store = tx.objectStore('capitals');
-           var res=[]
-           for (var i in items){
-
-           var temp = {}
-           temp[i]=items[i]
-            var temp=items[i]
-            temp["acronym"]=i
-           res.push(items[i])
-           }
+           
+           GLOBALS.all_capitals=items;
+           
+           var res =[]
+            for (let i in items){
+            
+                var temp =items[i]
+                temp.acronym = i
+                res.push(items[i])
+            }
+            
+            let html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select onchange="get_politician_name()" id="us_states"><optgroup> <option disabled selected value> -- select an option -- </option>'
+            for (var i in res){
+                html = html + '<option  id="'+res[i]["acronym"]+'"'+' value="'+res[i]["acronym"]+'">'+res[i]["name"]+'</option>'
+            }
+            GLOBALS.dropdownhtml= html+"</optgroup></select>"
+            
 
 
          return Promise.all(res.map(function(item) {
@@ -216,28 +267,56 @@ function dbaseentries(){
       getQuestions: (getQuestions),
       addQuestions: (addQuestions),
        addCapitals: (addCapitals),
+        addPoliticians: (addPoliticians),
+        getPoliticians: (getPoliticians)
       
      }
+     
+     
 
+}()
 
+$("#start").prop("disabled",false);
+ $("#get_previous").prop("disabled",true);
+$("#show-answer").prop("disabled",true);
+$("#get_next_1").prop("disabled",true);
 
-// }
+function get_politician_name(){
+  
+    let state =  $( "#us_states" ).val()
+    const q =  ($( "#question" ).text()).substring(5,9).trim();
+    var role;
+    
+    switch(q) {
+    case "Q#20":
+       role="senator" 
+        break;
+    case "Q#23":
+        role="representative" 
+        break;
+    case "Q#43":
+        role="governor" 
+        break;    
+     case "Q#44":
+        role="capital" 
+        break;  
+    }
+    
+    state=state.trim();
+    
+    const code = role+"_"+state
+    
+    var html = role==="capital" ? "The "+role+" of "+GLOBALS.all_capitals[state]["name"]+" is "+GLOBALS.all_capitals[state]["capital"] : "The "+role+" of "+GLOBALS.all_capitals[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]
+    $("#answer_text").html(html)
+    return html
+   
 }
- //()
+    
+    
+  // console.log($( "#question" ).val())
+   //$( "#myselect" ).val();
+    
 
-
- //idbApp.addQuestions();
-// idbApp.addCapitals();
-
-
-
-
-/*start add*/
-
-
-/* end */
-
-  //start()
 
 
 
@@ -245,90 +324,75 @@ function dbaseentries(){
 
 function start(){
 
+    
+    $("#answer").hide()
 
-$("#answer").hide()
+    
+ //   var vals = idb.getQuestions;
+    
+    
+    idb.getQuestions().then(function(data)
+    {
+        GLOBALS.num_questions = data.length
+        for (var i in data)
+        {
+          var temp={};
+          temp["id"]=i;
+          temp["ucis_id"]=data[i]["id"];
+          temp["question"]=data[i]["question"];
+          temp["is_location_dependent"] =data[i]["is_location_dependent"];
+          temp["answer"]= temp["is_location_dependent"] ? "depends on your location" : data[i]["answer"];
+           temp["role_name"] = (data[i] && data[i]["role_name"]) ? (data[i]["role_name"]) : false;
+          GLOBALS.all_data.push(temp)
+        }
+        var quiz_only_data=[]
+        GLOBALS.seq = GLOBALS.SequenceController (GLOBALS.all_data);
+        return display_elems(GLOBALS.seq.current())
+    })
+    
+     idb.getPoliticians().then(function(data)
+    {
+       
+        for (var i in data)
+        {
+          
+          GLOBALS.all_politicians[data[i]["role"].toLowerCase()+"_"+data[i]["state"]]=[data[i]]
+          
+          
 
-var data;
-var dbPromise = idb.open('civicstest', 1);
+        }
+        
+        
+        
+    })
+    
+    
+    
+//$("#start").prop("disabled",false);    
 
-
-dbPromise.then(function(db){
-  var tx = db.transaction('questions', 'readonly');
-  var store = tx.objectStore('questions');
-  return store.getAll();
-
-}).then(function(data){
- GLOBALS.num_questions = data.length
- for (var i in data){
-   var temp={};
-  temp["id"]=i;
-  temp["ucis_id"]=data[i]["id"];
-  temp["question"]=data[i]["question"];
-  temp["is_location_dependent"] =data[i]["is_location_dependent"];
-  temp["answer"]= temp["is_location_dependent"] ? "depends on your location" : data[i]["answer"];
-   temp["role_name"] = (data[i] && data[i]["role_name"]) ? (data[i]["role_name"]) : false;
-  GLOBALS.all_data.push(temp)
- }
-//console.log(GLOBALS.all_data)
-var quiz_only_data=[]
- seq = GLOBALS.SequenceController (GLOBALS.all_data);
-return display_elems(seq.current())
-
-});
-
-
-
-var dbPromise = idb.open('civicstest', 1);
-
-
-dbPromise.then(function(db){
-  var tx = db.transaction('capitals', 'readonly');
-  var store = tx.objectStore('capitals');
-  return store.getAll();
-
-}).then(function(data){
- 
-
- const res = []
- for (var i in data){
-     let temp={};
-     temp[data[i]["acronym"]]=data[i];
-     res.push(temp)
-    }
-GLOBALS.all_capitals = data;
-
-
-
- let html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select id="us_states"><optgroup>'
-for (var i in data){
-    html = html + '<option id="'+data[i]["acronym"]+'"'+' value="'+data[i]["name"]+'">'+data[i]["name"]+'</option>'
-}
-GLOBALS.dropdownhtml= html+"</optgroup></select>"
-console.log(html)
-});
-
-
-
-
+ $("#get_previous").prop("disabled",false);
+$("#show-answer").prop("disabled",false);
+$("#get_next_1").prop("disabled",false);
+    
 }
 
 function getcurrent(){
-  return  display_elems(seq.current())
+  return  display_elems(GLOBALS.seq.current())
 }
 
 function getprevious(){
-  return  display_elems(seq.prev())
+  return  display_elems(GLOBALS.seq.prev())
 }
 
 function getnext(){
-  return  display_elems(seq.next())
+  return  display_elems(GLOBALS.seq.next())
 }
 
 function display_elems(elems){
 
-  $("#question").html("UCIS Q#"+elems["ucis_id"]+": "+elems["question"])
-  $("#question").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
-$("#question").append("<p>"+elems["ucis_id"]+"/"+GLOBALS.num_questions+"</p>")
+    $("#question").html("UCIS Q#"+elems["ucis_id"]+": "+elems["question"])
+    $("#question").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
+    $("#question").append("<p>"+elems["ucis_id"]+"/"+GLOBALS.num_questions+"</p>")
     $("#answer").hide();
   
  
@@ -337,9 +401,12 @@ $("#question").append("<p>"+elems["ucis_id"]+"/"+GLOBALS.num_questions+"</p>")
     }
     else{
         $("#answer_text").html(elems["answer"]);
+          $("#answer_text").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
+
         }
-    $("#answer_text").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
-}
+        
+     
+  }
 
 function showanswer(){
 
