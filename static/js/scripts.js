@@ -36,6 +36,7 @@ const GLOBALS = {
     return outside
   }
 
+
 }
 
 
@@ -416,8 +417,10 @@ $("#get_next").prop("disabled",false);
     
 }
 
+
 function getcurrent(){
   return  display_elems(GLOBALS.seq.current())
+
 }
 
 function getprevious(){
@@ -427,6 +430,7 @@ function getprevious(){
 function getnext(){
   return  display_elems(GLOBALS.seq.next())
 }
+
 
 function display_elems(elems){
 
@@ -450,6 +454,7 @@ function display_elems(elems){
             
             $("#answer_text").html(html)
            
+
             })
     
         
