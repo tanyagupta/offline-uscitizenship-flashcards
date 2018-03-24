@@ -1,619 +1,263 @@
 
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
 <meta name="description" content="A website to welcome future immigrants and help them prepare for the US citizenship exam">
 <meta name="author" content="learnin60seconds.com">
 <meta name="keywords" content="US,citizenship,UCIS,naturalization,exam,USA,civics,Preguntas de educación cívica,Examen de Naturalización">
 <meta name="theme-color" content="#002868">
+<meta charset="UTF-8">
 
 
 <title>Civics Test Helper</title>
 
 
 
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
 
-<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+<link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
 
-
-
-  <link rel="stylesheet" defer href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 
 
-  <link rel="shortcut icon" href="/static/images/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.min.css">
 
-
-  <link rel="stylesheet" type="text/css" href="/static/css/bootstrapmin.css">
-
-  <link rel="stylesheet" type="text/css" href="/static/css/jquery-ui.min.css">
-<!--  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css.map">-->
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
- -->
  <link rel="manifest" href="manifest.json">
 
 </head>
 
 <style>
 
-
-.btn{
- margin: 2%;
-}
-#intro{
-   width: 100%;
-
-}
-.red_back{
-   background-color: #BF0A30;
-   height:15px;
-
-}
-.blue_back{
-     background-color: #002868;
-     height: 195px;
-}
-.white{
-     background-color: white;
-     height: 15px;;
-
-}
-.white_background{
-   background-color: white;
-   height: 3%;
-   width: 100%;
-}
-.blue_background{
-   background-color: #002868;
-   height: 15%;
-   width: 100%;
-}
-.blue_text_background{
-    background-color: #002868;
-    height: 15%;
-    width: 40%;
-    margin: left;
-}
-.white_text_header{
-
- padding: 1%;
- color: white;
-
-}
-/*
-body{
-  background-color: black;
-}
-*/
-.sidebar {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  overflow-y: auto;
-  padding-top: 12px;
-  position: absolute;
-  width: 100%;
-}
-
-.bottom,
-.bottom-left,
-.button-bar {
-  bottom: 0;
-  position: absolute;
-}
-
-.bottom-right,
-.button-bar-right {
-  bottom: 0;
-  position: absolute;
-  right: 0;
-}
-.branding-below {
-  bottom: 0px;
-  top: 0;
-}
-
-#bottom_area{
-  background-color: #e4e4e4;
-  height:  5%;
- text-align: center;
-
-}
-
-#play_q, #play_a, #show_next_single {
- margin-top: 5px;
- margin-bottom: 5px;
-}
-
-#remove_link_css, #home{
-    color: black;
-    background-color: white;
-    text-decoration: none;
-
-}
-
-
-/* unvisited link */
-a#remove_link_css:link {
-    color: black;
-}
-
-/* visited link */
-a#remove_link_css:visited {
-    color: black;
-    underline: none;
-}
-
-/* mouse over link */
-a#remove_link_css:hover {
-    color: black;
-    underline: none;
-}
-
-/* selected link */
-a#remove_link_css:active {
-    color: black;
-    underline: none;
-}
-.large_text{
- font-size:300%;
-
-}
-
-.small_text{
- font-size:50%;
-
-}
-#submit_state{
-    margin-top: 2%;
-}
-.blue{
-  border:  1px solid blue;
-
-}
-.jumbotron{
-  /*  background-image: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/values.png);*/
-
-
-
-}
-#welcome_img{
-
-}
-#blue_cloud {
-    display:block;
-    background-image: url('/images/statue-of-liberty.jp2');
-    background-size: cover;
-    height:50px;
-    width: 100px;
-
-}
-.title{
- color: #541b3d;
-}
-.subtitle{
-  color:#962558 ;
-}
-.cell{
- background-color: white;
-}
-body{
-/* background: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/languages.jpg) ;
- background-repeat: repeat;*/
-
-}
-img {
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-}
-
-
-
-.black{
-   border:  1px solid black;
-
-}
-.yellow{
-  border:  1px solid yellow;
-
-}
-.red{
-  border:  1px solid red;
-
-}
-.green{
-  border:  1px solid green;
-
-}
-
-.light_gray{
- background-color: "#d3d3d3";
-}
-
-
-#show_previous_single{
-  border-radius: 80%;
-  float: right;
-
-
-}
-
-#show_ne{
-   border-radius: 80%;
-   float: left;
-
-}
-
-
-#pbar {
-  height: 25px;
-  width: 45%;
-  background-color: white;
-
-}
-#pbar_inner {
-    background-color: black;
-
-
-}
-  #pbar_text {
-    text-align: center;
-    color: white;
-
-  }
-
-
-
-
-a.header_link:link, a.header_link:visited,.header_link{
- color: yellow;
-}
-
-.small{
- font-size:75%;
- width:45%;
-}
-.thin_padding{
-  padding: 0.5em 0.6em;
-}
-
-
-.next {
-   background-color:black;
-
-}
-
-
-#jumbo1{
-    background-image: url("/static/images/statue-of-liberty.png");
-    background-position:right center;
-    background-repeat:no-repeat;
-    background-size: 60%; /* you change this to "contain" if you don't want the images to be cropped */
-    background-color:  #002868;
-    color: #FFF8DC;
-}
-#answer_div{
-  font-size: 75%
-}
-
-@media screen and (max-width: 768px) {
- /*   #jumbo1 {
-         background-image: url(https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/images/statue-of-liberty-267948_1920.jpg);
-  background-position:right center;
-    background-repeat:no-repeat;
-    background-size: 25%; /* you change this to "contain" if you don't want the images to be cropped */
-/*    background-color:  #003366;
-    color: #FFF8DC;
-
-    }*/
-    #small_header_text{
-     display: none;
-
-    }
-    #flag_area{
-     display:none;
-    }
-    #title_area_blue{
-     height:15%;
-     width: 100%;
-    }
-    /*
-    .wrap{
-     font-size: 10px;
-    }
-    .display-3{
-      font-size: 12px;
-    }
-    .center_text{
-       font-size: 12px;
-    }*/
-/*    #show_next_single{
-     height: 70%;
-     font-size: 14px;
-    }
-*/
-}
-
-
-.skin{
-  background-color: #d3d3d3;
-  width: 300px;
-
-  position: absolute;
-  left: 10px;
-
-
-
-  float: left;
-
-}
-#msg{
-
-
-}
-
-  .info{
-    background-color: white;
-    color:blue;
-  }
-
-/*end*/
-
-
-
-
-#quiz_div{
-  width: 400px;
-  height: 300px;
- position: relative;
-}
-
-
-.form-control, .opt {
- /* background-color: #dd4b39;*/
-  color: white;
-}
-
-/* flashcard*/
-
-
-
-
-
-.flip-container {
-  perspective: 1000;
-  float: none;
-  cursor: pointer;
-
-
-   overflow-y: hidden;
-overflow-x: hidden;
-
-  /*  &:hover{
-    .flippable {
-      transform: rotateY(180deg);
-    }
-  }*/
-}
-.flip-container .flippable {
-  transition: 0.5s;
-  transform-style: preserve-3d;
-  position: relative;
-
-}
-.flip-container .flipme {
-  transform: rotateY(180deg);
-
-
-
-}
-
-.flip-container,
-.front,
-.back {
-  width: 400px;
-  height: 300px;
-
+body {
+  background-color:#01579B;
+  font-family: 'Inconsolata', sans-serif;
+  font-size: 18px;
+  color: #363636;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
   text-align: center;
-  font-size: 17px;
+  box-sizing: border-box; }
 
-
-
-
-
+select {
+  font-family: 'Inconsolata', sans-serif;
+  font-size: 16px;
+  color: #363636;
+  margin: 0;
+  padding: 0;
+  
 }
-.front,
-.back {
-  backface-visibility: hidden;
+
+#start {
+  -webkit-border-radius: 44;
+  -moz-border-radius: 44;
+  border-radius: 44px;
+   font-family: 'Inconsolata', sans-serif;
+  color: #ffffff;
+  font-size: 55px;
+  background: #01579B;
+  padding: 7px 20px 10px 20px;
+  text-decoration: none;
+}
+
+
+
+#flashcard {
+  border: 3px solid #3D7587;
+  border-radius: 5px;
+  max-width: 300px;
+  width: 90%;
+  height: 520px;
+  padding: 0 40px;
+  background-color: white;
+  margin: 60px auto 30px;
+  position: relative; }
+  @media (max-width: 640px) {
+    #flashcard {
+      max-width: 240px;
+      padding: 0 20px;
+      height: 460px; } }
+  #flashcard .card-stack-1 {
+    border: 3px solid #3D7587;
+    border-radius: 5px;
+    max-width: 300px;
+    width: 90%;
+    height: 520px;
+    padding: 0 40px;
+    background-color: white;
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    z-index: -1; }
+    @media (max-width: 640px) {
+      #flashcard .card-stack-1 {
+        max-width: 240px;
+        padding: 0 20px;
+        height: 460px; } }
+  #flashcard .card-stack-2 {
+    border: 3px solid #3D7587;
+    border-radius: 5px;
+    max-width: 300px;
+    width: 90%;
+    height: 520px;
+    padding: 0 40px;
+    background-color: white;
+    position: absolute;
+    top: -23px;
+    right: -23px;
+    z-index: -2; }
+    @media (max-width: 640px) {
+      #flashcard .card-stack-2 {
+        max-width: 240px;
+        padding: 0 20px;
+        height: 460px; } }
+  #flashcard .card-stack-3 {
+    border: 3px solid #3D7587;
+    border-radius: 5px;
+    max-width: 300px;
+    width: 90%;
+    height: 520px;
+    padding: 0 40px;
+    background-color: white;
+    position: absolute;
+    top: -33px;
+    right: -33px;
+    z-index: -3; }
+    @media (max-width: 640px) {
+      #flashcard .card-stack-3 {
+        max-width: 240px;
+        padding: 0 20px;
+        height: 460px; } }
+
+.question-container, .answer-container {
+  height: 190px;
+  padding: 15px 0;
+  position: relative; }
+
+.answer-container {
+  height: 270px; }
+
+.question, .answer {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%; }
 
-}
-.front {
-  z-index: 2;
-  color: black;
-  width: 100%;
+.answer small {
+  display: block;
+  margin-top: 20px; }
+.answer a {
+  font-size: 14px;
+  text-decoration: none;
+  border-bottom: 1px solid;
+  color: #90becd; }
+  .answer a:hover {
+    border-bottom: none; }
 
+button {
+  background-color: #01579B;
+  font-family: 'Iconsolata', sans-serif;
+  font-size: 18px;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 5px; }
+  button:hover {
+    cursor: pointer; }
 
+.faded {
+  opacity: .2; }
+  .faded:hover {
+    cursor: default; }
 
-}
-.center_text{
- text-align: center;
-}
-.front span {
+footer {
+  margin: 100px 20px 50px;
+  font-size: 14px;
+  color: #90becd; }
+  footer a {
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid;
+    color: #90becd; }
+    footer a:hover {
+      border-bottom: none; }
 
-  position: absolute;
-  top: 40px;
-  left: 10px;
-  right: 10px;
+@media (max-width: 640px) {
+  body {
+    font-size: 16px; }
 
-  font-family: verdana;
+  .question-container, .answer-container {
+    height: 160px; }
 
-/*  border:  1px solid yellow;*/
-}
-.back {
-  transform: rotateY(180deg);
-   direction: ltr;
-  font-family: Verdana;
-  color: black;
-  width: 100%;
-}
-#ans_text{
-
- transform: none;
-
-
-}
-
-.ac-university .front {
-  /*background: 	#3f3f00;
-  background: #E82C0C;*/
-  background:#d3d3d3;
-
-}
-.ac-university .back {
- /* background: #571004;
-  background: 	#3f3f00;*/
-  background: #d3d3d3;
-
-}
-
-.top_space{
-  margin-top: 5%;
-
-}
+  .answer-container {
+    height: 240px; } }
+    
 
 /* end */
 </style>
+
 <body>
-<div class="sidebar branding-below">
+		<section id="flashcard">
+			<article class="card">
+	
+				<div class="question-container">
+				
+					<div id="question" class="question"><button id="start" onclick="start()" >Start</button></div>
+						
+          
+				</div>
+				<div id= "answer" class="answer-container">
+					<span id="answer_text" class="answer"></span>		
+	
+					
+				</div>
+			
+				
+			
+			</article>
+			<div class="card-stack-1"></div>
+			<div class="card-stack-2"></div>
+			<div class="card-stack-3"></div>
+		</section>
 
+		<section id="controls">
+		  
+			<button id="get_previous" onclick="getprevious()" >&lt;</button>
+			<button id="show_answer" onclick="showanswer()" >show answer</button>
 
-<div class="jumbotron thin_padding" id="jumbo1">
+      <button id="get_next" onclick="getnext()" class="next"> &gt;</button>
+    
 
-<h1  class="display-3">Civics Test Helper</h1>
+		</section>
 
-<p  class="lead wrap">Citizenship civics questions with digital flash cards</p>
-<input id="home" type="button" onclick='terminate();$(".key_div").empty();$("#pbar").hide();$("#quiz_div").css({"font-size": "100%"});$("#quiz_div").html(start_html);' value="Start Over" />
+		<footer>
+      By <a href='https://github.com/tanyagupta/offline-uscitizenship-flashcards'>Tanya Gupta</a>.<br>
+       <small> (Design inspired by</small> <a href='https://github.com/ahoef/es2015-flashcard-app'><small>ahoef</a> and Icon pack by </small>
+       <a href="https://icons8.com"><small>Icons8</a>)</small>
 
-</div>
-
- <div class="container main">
-
- <div class="container">
-      <div class="row">
-        <div class="col-sm-1 key_div" id="pre_q">
-
-        </div>
-
-        <div class="col-sm-6 key_div" id="quiz_div">
-         <ul><li>Learn the citizenship civics questions with our digital flash cards</li><li>Hit the "Next" button to get a new flash card</li><li>Use left and right button to go back to previously viewed cards</li></ul>
-
-        <button type="button" id="start_page_1" onclick="start_page()" class="btn btn-primary btn-block btn btn-outline-primary">Start</button>
-
-
-
-
-        </div>
-         <div class="col-sm-1 key_div" id="ne_q">
-
-          </div>
-       </div>
-
-   </div>
-
-
-   <div class="row">
-   <div class="col-sm-3"></div>
-    <div class="col-sm-2"><div id="audio" class="row key_div"></div></div>
-     <div class="col-sm-1"></div>
-    </div>
-
-
-     <div class="row">
-   <div class="col-sm-2"></div>
-    <div class="col-sm-6">
-
-    </div>
-     <div class="col-sm-2"></div>
-    </div>
-
-    <div class="row">
-   <div class="col-sm-3"></div>
-     <div class="col-sm-2"><div id="change_q" class="row key_div"></div></div>
-    <div class="col-sm-1"></div>
-     </div>
-
-    <div class="row">
-    <div class="col-sm-2"></div>
-     <div class="col-sm-6">
-     <div class="small text-center key_div" id="time_msg"></div>
-     <div class="col-sm-2"></div>
-     </div>
-   </div>
-
-   <div class="row">
-   <div class="col-sm-2"></div>
-    <div class="col-sm-9">
-    <div id="pbar"><div id="pbar_inner"><div id="pbar_text"> </div></div>  </div>
-    </div>
-   <div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-    <div id="state" class="col-sm-12"></div>
-    </div>
-
-
-
-
-</div>
-
-
-
-<div>
-
-</div>
-
-<script>
-
-
-</script>
-
-<div id="bottom_area" class="sidebar bottom">
-  <small>
-         <a target='_blank' rel="noopener" href="https://learnin60seconds.com">
-         <img src='https://raw.githubusercontent.com/tanyagupta/tanyagupta.github.io/master/148294770832813.png' width='100' height='16' alt="li60 logo"
-         target="_new"></a>
-
-          o&nbsp;<a href="mailto:myamericalifen@li60.zendesk.com?Subject=myamerica.life%" target="_top">Help</a>&nbsp;&nbsp;o
-          <a href="https://tanyagupta.github.io/tos.html" target="_new">Terms of Service</a>&nbsp;&nbsp;
-
-
-
-
-         </small>
-
-
-
-
-</div>
-
-
-
-
-
+		</footer>
 
 
   <script src="static/js/libs.js"></script>
   <script defer src="static/js/scripts.js"></script>
 
-  <script defer src="/static/js/bootstrap.min.js" defer></script>
-  <script defer src="/static/js/jquery-ui.min.js" defer></script>
+
+
 
 
 </body>
 
 <script>
+ $("#start").prop("disabled",true);
+ $("#get_previous").prop("disabled",true);
+$("#show_answer").prop("disabled",true);
+$("#get_next").prop("disabled",true); 
+
+    
+ 
 /*global caches*/
 /*global navigator*/
 
