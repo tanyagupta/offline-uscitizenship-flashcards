@@ -41,7 +41,7 @@ const GLOBALS = {
 
 
 
-var idb = 
+var idb =
 
 function(){
 
@@ -85,36 +85,36 @@ function(){
       var store = tx.objectStore('questions');
       return store.getAll();
     });
-  
+
 
    }
-   
+
       function getPoliticians() {
     return dbPromise.then(function(db) {
       var tx = db.transaction('politicians', 'readonly');
       var store = tx.objectStore('politicians');
       return store.getAll();
     });
-  
+
 
    }
-   
+
    function addPoliticians(){
     const api_url = "https://script.google.com/macros/s/AKfycbypEMJ3kW4juwLOp3iPod4fWjinezYGRFnJQYnw-WOiBHHkExw/exec?politicians=a"  ;
     fetch(api_url)
              .then (response => {
-                                
+
                                    return response.json()
                                  })  // .then(function(response){return response.json}
              .then(items => {
 
                              let data_mod = []
-                            
+
                             items=items.data
-                            
+
                              for (let i in items)
                              {
-                                
+
                                let one_data={};
                                one_data["role"]= items[i][0]==='Governors' ? 'governor' : items[i][0] ;
                                one_data["state"]=items[i][1];
@@ -122,15 +122,15 @@ function(){
                                data_mod.push(one_data)
 
                              }
-                           
-                   
+
+
 
              dbPromise.then(function(db)
              {
 
                    var tx = db.transaction('politicians', 'readwrite');
                    var store = tx.objectStore('politicians');
-                   
+
 
 
                  return Promise.all(data_mod.map(function(item) {
@@ -147,9 +147,9 @@ function(){
            });
 
          });
-    
-       
-       
+
+
+
    }
 
 
@@ -161,7 +161,7 @@ function(){
                                    return response.json()
                                  })  // .then(function(response){return response.json}
              .then(items => {
-                            
+
                              let data_mod = []
 
                              for (const i in items)
@@ -179,7 +179,7 @@ function(){
 
                              }
                            var items=data_mod;
-                           
+
 
              dbPromise.then(function(db)
              {
@@ -189,7 +189,7 @@ function(){
 
 
                  return Promise.all(items.map(function(item) {
-                     
+
                      return store.add(item);
                    })
                  ).catch(function(e) {
@@ -210,12 +210,12 @@ function(){
             var tx = db.transaction('capitals', 'readonly');
             var store = tx.objectStore('capitals');
             return store.getAll()
-         
+
     });
-             
-         
+
+
          }
-         
+
          function getCapitalsByKey(){
             return dbPromise.then(function(db) {
             var tx = db.transaction('capitals', 'readonly');
@@ -224,20 +224,20 @@ function(){
             return store.getAll().then(function(data){
                let caps ={}
                 for (let i in data){
-                    
+
                     caps[data[i]["acronym"]]=data[i]
-                    
+
                 }
-               
+
                 return caps
             })
-            
+
     });
-             
-         
+
+
          }
-         
-         
+
+
          function addCapitals(){
          const api_url_caps = "https://script.google.com/macros/s/AKfycbwyzooED9Ob5Egct3tvFuILRxsQNUjfJeHlAk9X5HOpaML1mApk/exec?capital=c";
          fetch(api_url_caps)
@@ -250,9 +250,9 @@ function(){
            dbPromise.then(function(db) {
            var tx = db.transaction('capitals', 'readwrite');
            var store = tx.objectStore('capitals');
-           
+
            GLOBALS.all_capitals=items;
-           
+
            var res =[]
             for (let i in items){
                 var temp =items[i]
@@ -260,7 +260,7 @@ function(){
                 res.push(items[i])
             }
 
-            
+
 
 
          return Promise.all(res.map(function(item) {
@@ -298,10 +298,10 @@ function(){
         getPoliticians: (getPoliticians),
         getCapitals: (getCapitals),
         getCapitalsByKey: (getCapitalsByKey)
-      
+
      }
-     
-     
+
+
 
 }()
 
@@ -312,55 +312,55 @@ $("#get_next").prop("disabled",true);
 
 function get_politician_name(){
     idb.getCapitalsByKey().then(function(data){
-      
+
     let state =  $( "#us_states" ).val()
     const q =  ($( "#question" ).text()).substring(5,9).trim();
     var role;
-    
+
     switch(q) {
     case "Q#20":
-       role="senator" 
+       role="senator"
         break;
     case "Q#23":
-        role="representative" 
+        role="representative"
         break;
     case "Q#43":
-        role="governor" 
-        break;    
+        role="governor"
+        break;
      case "Q#44":
-        role="capital" 
-        break;  
+        role="capital"
+        break;
     }
-    
+
     state=state.trim();
-    
+
     const code = role+"_"+state;
 
     var html=""
      var audio =  '&nbsp;<img onclick="play_audio(3)" class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">'
-   
+
     if(GLOBALS.all_politicians && GLOBALS.all_politicians[code] && role !=="capital"){
     //&& GLOBALS.all_politicians[code][0]["name"]){
-     
-     html = "<p>The "+role+" of "+data[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]+" <small>*<a target='_blank' href='https://www.usa.gov/elected-officials'>more</a></small></p>"
+
+     html = "<p>The "+role+" of "+data[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]+" *<a target='_blank' href='https://www.usa.gov/elected-officials'>more</a></p>"
      html=html+audio
     }
     else if (role === "capital" &&  data[state] && data[state]["capital"]){
-      html = data[state]["capital"] 
+      html = data[state]["capital"]
       html = html+audio
     }
-    
+
     else{
-     html = state+" does not have a "+role   
+     html = state+" does not have a "+role
     html = html+audio
     }
-    
+
     $("#answer_text").html(html)
     return html
     })
-   
+
 }
-    
+
 
 
 
@@ -370,9 +370,9 @@ function get_politician_name(){
 
 function start(){
 
-    
+
     $("#answer").hide()
-  
+
     idb.getQuestions().then(function(data)
     {
         GLOBALS.num_questions = data.length
@@ -391,30 +391,30 @@ function start(){
         GLOBALS.seq = GLOBALS.SequenceController (GLOBALS.all_data);
         return display_elems(GLOBALS.seq.current())
     })
-    
+
      idb.getPoliticians().then(function(data)
     {
-       
+
         for (var i in data)
         {
-          
+
           GLOBALS.all_politicians[data[i]["role"].toLowerCase()+"_"+data[i]["state"]]=[data[i]]
-          
-          
+
+
 
         }
-        
-        
-        
+
+
+
     })
-    
-    
+
+
 
 
  $("#get_previous").prop("disabled",false);
 $("#show_answer").prop("disabled",false);
 $("#get_next").prop("disabled",false);
-    
+
 }
 
 
@@ -438,34 +438,34 @@ function display_elems(elems){
     $("#question").append('&nbsp;<img onclick="play_audio(0)" class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
     $("#question").append("<p>"+elems["ucis_id"]+"/"+GLOBALS.num_questions+"</p>")
     $("#answer").hide();
-    
-   
+
+
   if (elems["is_location_dependent"]){
          let html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select onchange="get_politician_name()" id="us_states"><optgroup> <option disabled selected value> -- select an option -- </option>'
 
- 
+
         idb.getCapitals().then(function(data){
-            
+
             for (var i in data){
-               
+
                 html = html + '<option  id="'+data[i]["acronym"]+'"'+' value="'+data[i]["acronym"]+'">'+data[i]["name"]+'</option>'
             }
             html = html+"</optgroup></select>"
-            
+
             $("#answer_text").html(html)
-           
+
 
             })
-    
-        
+
+
     }
     else{
         $("#answer_text").html(elems["answer"]);
           $("#answer_text").append('&nbsp;<img onclick="play_audio(1)" class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
 
         }
-        
-     
+
+
   }
 
 function showanswer(){
@@ -478,20 +478,24 @@ function showanswer(){
 
 
 function play_audio (code) {
+  console.log(code)
   var string;
   if (code===0){
     string = GLOBALS.seq.current().question
   }
   else if(code ===1){
   string=GLOBALS.seq.current().answer
+  console.log(string)
   }
   else{
-   string = $("#answer_text").text();  
+   string = $("#answer_text").text();
+
    if(string.indexOf('*',0) !== -1){
      string = string.substr(0,string.indexOf('*',0) )
    }
+
   }
-  console.log(string)
+  
   var msg = new SpeechSynthesisUtterance();
   var voices = window.speechSynthesis.getVoices();
   msg.voice = voices[0]; // Note: some voices don't support altering params
@@ -505,10 +509,11 @@ function play_audio (code) {
   speechSynthesis.speak(msg);
 
 
+
+
+
   msg.addEventListener("end", function() {
 
    });
-   
+
 }
-
-

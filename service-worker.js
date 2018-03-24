@@ -3,6 +3,7 @@
   (function() {
     'use strict';
     var filesToCache = [
+      'manifest.json',
       'index.html',
       'static/js/libs.js',
       'static/js/scripts.js',

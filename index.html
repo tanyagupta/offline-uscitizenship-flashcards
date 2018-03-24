@@ -1,29 +1,20 @@
 
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1">
 <meta name="description" content="A website to welcome future immigrants and help them prepare for the US citizenship exam">
 <meta name="author" content="learnin60seconds.com">
 <meta name="keywords" content="US,citizenship,UCIS,naturalization,exam,USA,civics,Preguntas de educación cívica,Examen de Naturalización">
 <meta name="theme-color" content="#002868">
 <meta charset="UTF-8">
+ <link rel="manifest" href="/manifest.json">
+<main>
+  <title>Civics Test Helper</title>
+  <link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 
-
-<title>Civics Test Helper</title>
-
-
-
-
-<link rel="icon" type="image/png" href="static/images/icons/favicon.ico">
-
-<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-
-
-  <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.min.css">
-
- <link rel="manifest" href="manifest.json">
-
-</head>
-
+  </head>
+</main>
 <style>
 
 body {
@@ -43,7 +34,7 @@ select {
   color: #363636;
   margin: 0;
   padding: 0;
-  
+
 }
 
 #start {
@@ -56,6 +47,9 @@ select {
   background: #01579B;
   padding: 7px 20px 10px 20px;
   text-decoration: none;
+}
+.author_text{
+  font-size:20px;
 }
 
 
@@ -145,11 +139,11 @@ select {
   text-align: center;
   width: 100%; }
 
-.answer small {
+.answer  {
   display: block;
   margin-top: 20px; }
 .answer a {
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
   border-bottom: 1px solid;
   color: #90becd; }
@@ -175,13 +169,13 @@ button {
 
 footer {
   margin: 100px 20px 50px;
-  font-size: 14px;
-  color: #90becd; }
+  font-size: 16px;
+  color: white; }
   footer a {
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
     border-bottom: 1px solid;
-    color: #90becd; }
+    color: white; }
     footer a:hover {
       border-bottom: none; }
 
@@ -194,7 +188,7 @@ footer {
 
   .answer-container {
     height: 240px; } }
-    
+
 
 /* end */
 </style>
@@ -202,21 +196,21 @@ footer {
 <body>
 		<section id="flashcard">
 			<article class="card">
-	
+
 				<div class="question-container">
-				
+
 					<div id="question" class="question"><button id="start" onclick="start()" >Start</button></div>
-						
-          
+
+
 				</div>
 				<div id= "answer" class="answer-container">
-					<span id="answer_text" class="answer"></span>		
-	
-					
+					<span id="answer_text" class="answer"></span>
+
+
 				</div>
-			
-				
-			
+
+
+
 			</article>
 			<div class="card-stack-1"></div>
 			<div class="card-stack-2"></div>
@@ -224,20 +218,21 @@ footer {
 		</section>
 
 		<section id="controls">
-		  
+
 			<button id="get_previous" onclick="getprevious()" >&lt;</button>
 			<button id="show_answer" onclick="showanswer()" >show answer</button>
 
       <button id="get_next" onclick="getnext()" class="next"> &gt;</button>
-    
+
 
 		</section>
 
 		<footer>
-      By <a href='https://github.com/tanyagupta/offline-uscitizenship-flashcards'>Tanya Gupta</a>.<br>
-       <small> (Design inspired by</small> <a href='https://github.com/ahoef/es2015-flashcard-app'><small>ahoef</a> and Icon pack by </small>
-       <a href="https://icons8.com"><small>Icons8</a>)</small>
-
+      <p class="footer_text">
+      <div class="author_text">By </div><a href='https://github.com/tanyagupta/offline-uscitizenship-flashcards'><div class="author_text">Tanya Gupta</div></a>
+       (Design inspired by <a href='https://github.com/ahoef/es2015-flashcard-app'>ahoef</a> and Icon pack by
+       <a href="https://icons8.com">Icons8</a>)
+     </p>
 		</footer>
 
 
@@ -254,10 +249,10 @@ footer {
  $("#start").prop("disabled",true);
  $("#get_previous").prop("disabled",true);
 $("#show_answer").prop("disabled",true);
-$("#get_next").prop("disabled",true); 
+$("#get_next").prop("disabled",true);
 
-    
- 
+
+
 /*global caches*/
 /*global navigator*/
 
@@ -274,3 +269,4 @@ $("#get_next").prop("disabled",true);
   }
 
 </script>
+</html>

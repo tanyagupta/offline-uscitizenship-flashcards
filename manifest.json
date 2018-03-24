@@ -27,9 +27,9 @@
       "sizes": "180X180",
       "type": "image/png"
     }],
-  "start_url": "/index.html?launcher=true",
+  "start_url": "index.html?launcher=true",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#002868",
-  "theme_color": "#002868"
+  "background_color": "#01579B",
+  "theme_color": "#01579B"
 }
