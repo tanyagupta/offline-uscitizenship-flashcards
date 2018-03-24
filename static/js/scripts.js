@@ -336,19 +336,22 @@ function get_politician_name(){
     const code = role+"_"+state;
 
     var html=""
-    
+     var audio =  '&nbsp;<img onclick="play_audio(3)" class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">'
+   
     if(GLOBALS.all_politicians && GLOBALS.all_politicians[code] && role !=="capital"){
     //&& GLOBALS.all_politicians[code][0]["name"]){
-    
-     html = "The "+role+" of "+data[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]+"<small><a target='_blank' href='https://www.usa.gov/elected-officials'>More</a></small>"
+     
+     html = "<p>The "+role+" of "+data[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]+" <small>*<a target='_blank' href='https://www.usa.gov/elected-officials'>more</a></small></p>"
+     html=html+audio
     }
     else if (role === "capital" &&  data[state] && data[state]["capital"]){
       html = data[state]["capital"] 
-   
+      html = html+audio
     }
     
     else{
      html = state+" does not have a "+role   
+    html = html+audio
     }
     
     $("#answer_text").html(html)
@@ -446,6 +449,7 @@ function display_elems(elems){
             html = html+"</optgroup></select>"
             
             $("#answer_text").html(html)
+           
             })
     
         
@@ -473,9 +477,16 @@ function play_audio (code) {
   if (code===0){
     string = GLOBALS.seq.current().question
   }
-  else{
+  else if(code ===1){
   string=GLOBALS.seq.current().answer
   }
+  else{
+   string = $("#answer_text").text();  
+   if(string.indexOf('*',0) !== -1){
+     string = string.substr(0,string.indexOf('*',0) )
+   }
+  }
+  console.log(string)
   var msg = new SpeechSynthesisUtterance();
   var voices = window.speechSynthesis.getVoices();
   msg.voice = voices[0]; // Note: some voices don't support altering params
