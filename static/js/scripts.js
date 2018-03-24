@@ -204,7 +204,39 @@ function(){
          });
          }
 
-
+         function getCapitals(){
+            return dbPromise.then(function(db) {
+            var tx = db.transaction('capitals', 'readonly');
+            var store = tx.objectStore('capitals');
+            return store.getAll()
+         
+    });
+             
+         
+         }
+         
+         function getCapitalsByKey(){
+            return dbPromise.then(function(db) {
+            var tx = db.transaction('capitals', 'readonly');
+            var store = tx.objectStore('capitals');
+//            return store.getAll()
+            return store.getAll().then(function(data){
+               let caps ={}
+                for (let i in data){
+                    
+                    caps[data[i]["acronym"]]=data[i]
+                    
+                }
+               
+                return caps
+            })
+            
+    });
+             
+         
+         }
+         
+         
          function addCapitals(){
          const api_url_caps = "https://script.google.com/macros/s/AKfycbwyzooED9Ob5Egct3tvFuILRxsQNUjfJeHlAk9X5HOpaML1mApk/exec?capital=c";
          fetch(api_url_caps)
@@ -222,17 +254,11 @@ function(){
            
            var res =[]
             for (let i in items){
-            
                 var temp =items[i]
                 temp.acronym = i
                 res.push(items[i])
             }
-            
-            let html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select onchange="get_politician_name()" id="us_states"><optgroup> <option disabled selected value> -- select an option -- </option>'
-            for (var i in res){
-                html = html + '<option  id="'+res[i]["acronym"]+'"'+' value="'+res[i]["acronym"]+'">'+res[i]["name"]+'</option>'
-            }
-            GLOBALS.dropdownhtml= html+"</optgroup></select>"
+
             
 
 
@@ -268,7 +294,9 @@ function(){
       addQuestions: (addQuestions),
        addCapitals: (addCapitals),
         addPoliticians: (addPoliticians),
-        getPoliticians: (getPoliticians)
+        getPoliticians: (getPoliticians),
+        getCapitals: (getCapitals),
+        getCapitalsByKey: (getCapitalsByKey)
       
      }
      
@@ -278,11 +306,12 @@ function(){
 
 $("#start").prop("disabled",false);
  $("#get_previous").prop("disabled",true);
-$("#show-answer").prop("disabled",true);
-$("#get_next_1").prop("disabled",true);
+$("#show_answer").prop("disabled",true);
+$("#get_next").prop("disabled",true);
 
 function get_politician_name(){
-  
+    idb.getCapitalsByKey().then(function(data){
+      
     let state =  $( "#us_states" ).val()
     const q =  ($( "#question" ).text()).substring(5,9).trim();
     var role;
@@ -304,18 +333,31 @@ function get_politician_name(){
     
     state=state.trim();
     
-    const code = role+"_"+state
+    const code = role+"_"+state;
+
+    var html=""
     
-    var html = role==="capital" ? "The "+role+" of "+GLOBALS.all_capitals[state]["name"]+" is "+GLOBALS.all_capitals[state]["capital"] : "The "+role+" of "+GLOBALS.all_capitals[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]
+    if(GLOBALS.all_politicians && GLOBALS.all_politicians[code] && role !=="capital"){
+    //&& GLOBALS.all_politicians[code][0]["name"]){
+    
+     html = "The "+role+" of "+data[state]["name"]+" is "+GLOBALS.all_politicians[code][0]["name"]+"<small><a target='_blank' href='https://www.usa.gov/elected-officials'>More</a></small>"
+    }
+    else if (role === "capital" &&  data[state] && data[state]["capital"]){
+      html = data[state]["capital"] 
+   
+    }
+    
+    else{
+     html = state+" does not have a "+role   
+    }
+    
     $("#answer_text").html(html)
     return html
+    })
    
 }
     
-    
-  // console.log($( "#question" ).val())
-   //$( "#myselect" ).val();
-    
+
 
 
 
@@ -326,11 +368,7 @@ function start(){
 
     
     $("#answer").hide()
-
-    
- //   var vals = idb.getQuestions;
-    
-    
+  
     idb.getQuestions().then(function(data)
     {
         GLOBALS.num_questions = data.length
@@ -367,12 +405,11 @@ function start(){
     })
     
     
-    
-//$("#start").prop("disabled",false);    
+
 
  $("#get_previous").prop("disabled",false);
-$("#show-answer").prop("disabled",false);
-$("#get_next_1").prop("disabled",false);
+$("#show_answer").prop("disabled",false);
+$("#get_next").prop("disabled",false);
     
 }
 
@@ -391,17 +428,31 @@ function getnext(){
 function display_elems(elems){
 
     $("#question").html("UCIS Q#"+elems["ucis_id"]+": "+elems["question"])
-    $("#question").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
+    $("#question").append('&nbsp;<img onclick="play_audio(0)" class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
     $("#question").append("<p>"+elems["ucis_id"]+"/"+GLOBALS.num_questions+"</p>")
     $("#answer").hide();
-  
- 
+    
+   
   if (elems["is_location_dependent"]){
-        $("#answer_text").html(GLOBALS.dropdownhtml)
+         let html = '<p class="small_text">The answer depends on the state you reside in. Select your state</p><select onchange="get_politician_name()" id="us_states"><optgroup> <option disabled selected value> -- select an option -- </option>'
+
+ 
+        idb.getCapitals().then(function(data){
+            
+            for (var i in data){
+               
+                html = html + '<option  id="'+data[i]["acronym"]+'"'+' value="'+data[i]["acronym"]+'">'+data[i]["name"]+'</option>'
+            }
+            html = html+"</optgroup></select>"
+            
+            $("#answer_text").html(html)
+            })
+    
+        
     }
     else{
         $("#answer_text").html(elems["answer"]);
-          $("#answer_text").append('&nbsp;<img class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
+          $("#answer_text").append('&nbsp;<img onclick="play_audio(1)" class="audio_icon" alt="audio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVDhPldIxS4JRGMXxJ6s5oyloTGjQycFJWp2iICgkclCEphZBBHFpaPArNPYF2hpqjpaI1mgKERoqioIgqv9zn3vjIjfJAz8894Wj76vKmJQwb3WyrOETDXeyLGDR6t/RT3zDN/b0gs8OnrHrToks4wE6jMcz/rWCJ2y5E6mh7d0iDOPxFfpWZR0vyOrhC/EgFsYrGCLc8gX2taRGQfzMdVxalS6OtaRGQTxexcCqNHGmJTUK4nEPp1blEEdaPpAaqjDexDvKyEC/2Cokh6J3jtT4BBtWpYM7hJ/vN3O4wehYM4sDvKKgF1JZwj1Gxy1cI+9OY6Lv/Ihtd7JMef+K/oOmraYi8gMNVlYpGeXoYQAAAABJRU5ErkJggg==">')
 
         }
         
@@ -420,10 +471,10 @@ function showanswer(){
 function play_audio (code) {
   var string;
   if (code===0){
-    string = seq.current().question
+    string = GLOBALS.seq.current().question
   }
   else{
-  string=seq.current().answer
+  string=GLOBALS.seq.current().answer
   }
   var msg = new SpeechSynthesisUtterance();
   var voices = window.speechSynthesis.getVoices();
